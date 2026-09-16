@@ -25,6 +25,7 @@ import { useAllReviews, useDeleteReview } from '@/api/reviews.api';
 import { useProducts } from '@/api/products.api';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import { formatDate } from '@/utils/helpers';
 import type { Review } from '@/types';
 
@@ -55,6 +56,12 @@ const ManageReviewsPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Review Moderation"
+        description="Moderate customer reviews and the verified purchase programme at Classic Watch Pro."
+        noindex
+        nofollow
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         Reviews
       </Typography>

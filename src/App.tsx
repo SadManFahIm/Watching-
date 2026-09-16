@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
 import { ErrorBoundary } from 'react-error-boundary';
+import { HelmetProvider } from 'react-helmet-async';
 
 // Store
 import { useAuthStore } from '@/store/auth.store';
@@ -48,6 +49,7 @@ const ManageOrders = lazy(() => import('@/features/admin/pages/ManageOrdersPage'
 const ManageUsers = lazy(() => import('@/features/admin/pages/ManageUsersPage'));
 const ManageReviews = lazy(() => import('@/features/admin/pages/ManageReviewsPage'));
 const AddProduct = lazy(() => import('@/features/admin/pages/AddProductPage'));
+const NotFound = lazy(() => import('@/features/errors/pages/NotFoundPage'));
 
 // Components
 import LoadingScreen from '@/components/common/LoadingScreen';
@@ -83,101 +85,102 @@ function App() {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <BrowserRouter>
-            <Suspense fallback={<LoadingScreen />}>
-              <Routes>
-                {/* Public routes with MainLayout */}
-                <Route element={<MainLayout />}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/products/:id" element={<ProductDetail />} />
-                  <Route path="/cart" element={<Cart />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/forgot-password" element={<ForgotPassword />} />
-                  <Route path="/verify-email" element={<VerifyEmail />} />
-                </Route>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+              <Suspense fallback={<LoadingScreen />}>
+                <Routes>
+                  {/* Public routes with MainLayout */}
+                  <Route element={<MainLayout />}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/products/:id" element={<ProductDetail />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
+                    {/* 404 — keep the header/footer shell so users can recover. */}
+                    <Route path="*" element={<NotFound />} />
+                  </Route>
 
-                {/* Protected routes with MainLayout */}
-                <Route
-                  element={
-                    <ProtectedRoute>
-                      <MainLayout />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route path="/checkout" element={<Checkout />} />
-                  <Route path="/wishlist" element={<Wishlist />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/orders/:id" element={<OrderDetail />} />
-                </Route>
+                  {/* Protected routes with MainLayout */}
+                  <Route
+                    element={
+                      <ProtectedRoute>
+                        <MainLayout />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/wishlist" element={<Wishlist />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/orders/:id" element={<OrderDetail />} />
+                  </Route>
 
-                {/* Dashboard routes with DashboardLayout */}
-                <Route
-                  element={
-                    <ProtectedRoute>
-                      <DashboardLayout />
-                    </ProtectedRoute>
-                  }
-                >
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/dashboard/orders" element={<MyOrders />} />
-                </Route>
+                  {/* Dashboard routes with DashboardLayout */}
+                  <Route
+                    element={
+                      <ProtectedRoute>
+                        <DashboardLayout />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard/orders" element={<MyOrders />} />
+                  </Route>
 
-                {/* Admin routes with DashboardLayout */}
-                <Route
-                  element={
-                    <AdminRoute>
-                      <DashboardLayout />
-                    </AdminRoute>
-                  }
-                >
-                  <Route path="/admin" element={<AdminDashboard />} />
-                  <Route path="/admin/products" element={<ManageProducts />} />
-                  <Route path="/admin/products/add" element={<AddProduct />} />
-                  <Route path="/admin/products/edit/:id" element={<AddProduct />} />
-                  <Route path="/admin/orders" element={<ManageOrders />} />
-                  <Route path="/admin/users" element={<ManageUsers />} />
-                  <Route path="/admin/reviews" element={<ManageReviews />} />
-                </Route>
+                  {/* Admin routes with DashboardLayout */}
+                  <Route
+                    element={
+                      <AdminRoute>
+                        <DashboardLayout />
+                      </AdminRoute>
+                    }
+                  >
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/products" element={<ManageProducts />} />
+                    <Route path="/admin/products/add" element={<AddProduct />} />
+                    <Route path="/admin/products/edit/:id" element={<AddProduct />} />
+                    <Route path="/admin/orders" element={<ManageOrders />} />
+                    <Route path="/admin/users" element={<ManageUsers />} />
+                    <Route path="/admin/reviews" element={<ManageReviews />} />
+                  </Route>
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
 
-                {/* 404 */}
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-
-          {/* Toast notifications */}
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: isDark ? '#1e1e1e' : '#fff',
-                color: isDark ? '#fff' : '#000',
-              },
-              success: {
-                iconTheme: {
-                  primary: '#10b981',
-                  secondary: '#fff',
+            {/* Toast notifications */}
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 4000,
+                style: {
+                  background: isDark ? '#1e1e1e' : '#fff',
+                  color: isDark ? '#fff' : '#000',
                 },
-              },
-              error: {
-                iconTheme: {
-                  primary: '#ef4444',
-                  secondary: '#fff',
+                success: {
+                  iconTheme: {
+                    primary: '#10b981',
+                    secondary: '#fff',
+                  },
                 },
-              },
-            }}
-          />
-        </ThemeProvider>
+                error: {
+                  iconTheme: {
+                    primary: '#ef4444',
+                    secondary: '#fff',
+                  },
+                },
+              }}
+            />
+          </ThemeProvider>
 
-        {/* React Query Devtools (only in dev) */}
-        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
-      </QueryClientProvider>
+          {/* React Query Devtools (only in dev) */}
+          {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+        </QueryClientProvider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }

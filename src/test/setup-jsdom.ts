@@ -1,6 +1,17 @@
 import '@testing-library/jest-dom/vitest';
 import { afterEach, vi } from 'vitest';
+import type { ReactNode } from 'react';
 import { cleanup } from '@testing-library/react';
+
+// react-helmet-async's <Helmet> requires a <HelmetProvider> ancestor, but
+// page/component tests render isolated trees without one. No jsdom test
+// asserts on <head> output (that belongs to the E2E / Lighthouse runs), so
+// render Helmet as a no-op and HelmetProvider as a pass-through.
+vi.mock('react-helmet-async', () => {
+  const HelmetProvider = ({ children }: { children?: ReactNode }) => children ?? null;
+  const Helmet = () => null;
+  return { HelmetProvider, Helmet };
+});
 
 // This setup file also runs for the node-environment store tests, where
 // `window` does not exist — only install the DOM shims in a browser env.

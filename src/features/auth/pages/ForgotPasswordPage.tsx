@@ -18,6 +18,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
 import AuthLayout from '@/features/auth/components/AuthLayout';
+import Seo from '@/components/seo/Seo';
 
 const forgotSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Enter a valid email address'),
@@ -53,6 +54,11 @@ const ForgotPasswordPage = () => {
 
   return (
     <AuthLayout>
+      <Seo
+        title="Reset Your Password"
+        description="Reset your Classic Watch Pro account password with a secure, time-limited email link."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={800}>
         Reset your password
       </Typography>

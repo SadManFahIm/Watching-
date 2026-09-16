@@ -39,6 +39,8 @@ import ManageOrdersPage from '@/features/admin/pages/ManageOrdersPage';
 import ManageUsersPage from '@/features/admin/pages/ManageUsersPage';
 import ManageReviewsPage from '@/features/admin/pages/ManageReviewsPage';
 import AddProductPage from '@/features/admin/pages/AddProductPage';
+import NotFoundPage from '@/features/errors/pages/NotFoundPage';
+import ErrorFallback from '@/components/common/ErrorFallback';
 
 import { useAuthStore } from '@/store/auth.store';
 import { useCartStore } from '@/store/cart.store';
@@ -91,6 +93,7 @@ const AppRoutes = () => (
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
     <Route
       element={
@@ -330,6 +333,23 @@ describe('accessibility regression tests (axe-core, WCAG A/AA)', () => {
       },
       { timeout: 15000 }
     );
+    await expectNoA11yViolations();
+  });
+
+  it('404 page', async () => {
+    renderPage('/no-such-route', 'guest');
+    await waitFor(() => expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument());
+    await expectNoA11yViolations();
+  });
+
+  it('error boundary fallback', async () => {
+    render(
+      <ThemeProvider theme={createAppTheme('light')}>
+        <CssBaseline />
+        <ErrorFallback error={new Error('Test boundary error')} resetErrorBoundary={() => {}} />
+      </ThemeProvider>
+    );
+    await waitFor(() => expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument());
     await expectNoA11yViolations();
   });
 });

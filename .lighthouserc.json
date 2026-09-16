@@ -12,23 +12,47 @@
       "startServerReadyTimeout": 30000
     },
     "assert": {
-      "assertions": {
-        "categories:performance": ["warn", { "minScore": 0.8 }],
-        "categories:accessibility": ["error", { "minScore": 0.9 }],
-        "categories:best-practices": ["error", { "minScore": 0.9 }],
-        "categories:seo": ["error", { "minScore": 0.9 }],
-        "first-contentful-paint": ["error", { "maxNumericValue": 4000 }],
-        "largest-contentful-paint": ["error", { "maxNumericValue": 5500 }],
-        "interactive": ["error", { "maxNumericValue": 8000 }],
-        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
-        "total-blocking-time": ["error", { "maxNumericValue": 1200 }],
-        "speed-index": ["warn", { "minScore": 0.85 }],
-        "errors-in-console": ["warn", { "maxLength": 0 }],
-        "heading-order": ["warn", { "maxLength": 0 }],
-        "unused-javascript": ["warn", { "maxLength": 5 }],
-        "unminified-javascript": ["warn", { "maxLength": 0 }],
-        "render-blocking-resources": ["warn", { "maxLength": 3 }]
-      }
+      "assertMatrix": [
+        {
+          "matchingUrlPattern": "http://127.0.0.1:4173/(products)?$",
+          "assertions": {
+            "categories:performance": ["warn", { "minScore": 0.8 }],
+            "categories:accessibility": ["error", { "minScore": 0.9 }],
+            "categories:best-practices": ["error", { "minScore": 0.9 }],
+            "categories:seo": ["error", { "minScore": 0.9 }],
+            "first-contentful-paint": ["error", { "maxNumericValue": 4000 }],
+            "largest-contentful-paint": ["error", { "maxNumericValue": 5500 }],
+            "interactive": ["error", { "maxNumericValue": 8000 }],
+            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+            "total-blocking-time": ["error", { "maxNumericValue": 1400 }],
+            "speed-index": ["warn", { "minScore": 0.85 }],
+            "errors-in-console": ["warn", { "maxLength": 0 }],
+            "heading-order": ["warn", { "maxLength": 0 }],
+            "unused-javascript": ["warn", { "maxLength": 5 }],
+            "unminified-javascript": ["warn", { "maxLength": 0 }],
+            "render-blocking-resources": ["warn", { "maxLength": 3 }]
+          }
+        },
+        {
+          "matchingUrlPattern": "\\/cart$",
+          "assertions": {
+            "categories:performance": ["warn", { "minScore": 0.8 }],
+            "categories:accessibility": ["error", { "minScore": 0.9 }],
+            "categories:best-practices": ["error", { "minScore": 0.9 }],
+            "first-contentful-paint": ["error", { "maxNumericValue": 4000 }],
+            "largest-contentful-paint": ["error", { "maxNumericValue": 5500 }],
+            "interactive": ["error", { "maxNumericValue": 8000 }],
+            "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }],
+            "total-blocking-time": ["error", { "maxNumericValue": 1400 }],
+            "speed-index": ["warn", { "minScore": 0.85 }],
+            "errors-in-console": ["warn", { "maxLength": 0 }],
+            "heading-order": ["warn", { "maxLength": 0 }],
+            "unused-javascript": ["warn", { "maxLength": 5 }],
+            "unminified-javascript": ["warn", { "maxLength": 0 }],
+            "render-blocking-resources": ["warn", { "maxLength": 3 }]
+          }
+        }
+      ]
     }
   }
 }

@@ -24,6 +24,7 @@ import { ORDER_STATUS_LABELS, PAYMENT_META } from '@/features/orders/constants';
 import { pushNotification } from '@/store/notifications.store';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency, formatDate } from '@/utils/helpers';
 import type { Order, OrderStatus } from '@/types';
 
@@ -91,6 +92,12 @@ const ManageOrdersPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Manage Orders"
+        description="Manage fulfilment and refunds for Classic Watch Pro orders."
+        noindex
+        nofollow
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         Orders
       </Typography>

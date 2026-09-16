@@ -10,6 +10,7 @@ import {
 import { useAuthStore } from '@/store/auth.store';
 import { getApiErrorMessage } from '@/lib/axios';
 import AuthLayout from '@/features/auth/components/AuthLayout';
+import Seo from '@/components/seo/Seo';
 
 /**
  * Route-level email-verification gate. Authenticated-but-unverified Firebase
@@ -79,6 +80,11 @@ const VerifyEmailPage = () => {
 
   return (
     <AuthLayout>
+      <Seo
+        title="Verify Your Email"
+        description="Verify your Classic Watch Pro email to activate your account."
+        noindex
+      />
       <Typography variant="overline" color="primary.main" fontWeight={800}>
         One last step
       </Typography>

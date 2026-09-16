@@ -29,6 +29,7 @@ import { useProduct, useCreateProduct, useUpdateProduct } from '@/api/products.a
 import { getApiErrorMessage } from '@/lib/axios';
 import { PRODUCT_CATEGORIES } from '@/features/products/constants';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency } from '@/utils/helpers';
 import type { Product } from '@/types';
 
@@ -227,6 +228,12 @@ const AddProductPage = () => {
 
   return (
     <Box>
+      <Seo
+        title={isEdit ? 'Edit Product' : 'Add Product'}
+        description="Manage the Classic Watch Pro catalog — add or edit a product."
+        noindex
+        nofollow
+      />
       <Breadcrumbs sx={{ mb: 1, fontSize: '0.85rem' }} aria-label="breadcrumb">
         <Typography
           component={RouterLink}

@@ -24,6 +24,7 @@ import { useWishlistStore } from '@/store/wishlist.store';
 import OrderStatusBadge from '@/features/orders/components/OrderStatusBadge';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency, formatDate } from '@/utils/helpers';
 
 const DashboardPage = () => {
@@ -50,6 +51,11 @@ const DashboardPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Dashboard"
+        description="Your Classic Watch Pro account dashboard — track orders and manage your collection."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         Welcome back{user?.displayName ? `, ${user.displayName.split(' ')[0]}` : ''}
       </Typography>

@@ -42,6 +42,7 @@ import { formatCurrency, calculateDiscount } from '@/utils/helpers';
 import ProductGrid from '@/features/products/components/ProductGrid';
 import ReviewsSection from '@/features/products/components/ReviewsSection';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
+import Seo from '@/components/seo/Seo';
 
 const DetailSkeleton = () => (
   <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -171,6 +172,42 @@ const ProductDetailPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Seo
+        title={product.name}
+        description={`${product.brand} ${product.model} — ${product.description.slice(0, 150)}${
+          product.description.length > 150 ? '…' : ''
+        }`}
+        image={images[0] || product.thumbnail}
+        keywords={[product.brand, product.category, 'watch', 'timepiece']}
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: product.name,
+          image: images,
+          description: product.description,
+          brand: { '@type': 'Brand', name: product.brand },
+          category: product.category,
+          sku: product.id,
+          aggregateRating:
+            product.reviewCount > 0
+              ? {
+                  '@type': 'AggregateRating',
+                  ratingValue: product.rating,
+                  reviewCount: product.reviewCount,
+                }
+              : undefined,
+          offers: {
+            '@type': 'Offer',
+            url: `https://classic-watch-pro.vercel.app/products/${product.id}`,
+            priceCurrency: 'USD',
+            price: product.price,
+            availability: outOfStock
+              ? 'https://schema.org/OutOfStock'
+              : 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/NewCondition',
+          },
+        }}
+      />
       {/* Breadcrumb */}
       <Breadcrumbs sx={{ mb: 3, fontSize: '0.9rem' }} aria-label="breadcrumb">
         <Typography

@@ -3,19 +3,12 @@ import { Link as RouterLink, Navigate, useLocation, useNavigate } from 'react-ro
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import {
-  Alert,
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
 import AuthLayout from '@/features/auth/components/AuthLayout';
+import Seo from '@/components/seo/Seo';
 
 const registerSchema = z
   .object({
@@ -69,6 +62,11 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout>
+      <Seo
+        title="Create an Account"
+        description="Create your Classic Watch Pro account for member pricing, order tracking and exclusive releases."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={800}>
         Create your account
       </Typography>
@@ -120,8 +118,7 @@ const RegisterPage = () => {
             {...register('password')}
             error={Boolean(errors.password)}
             helperText={
-              errors.password?.message ??
-              'At least 8 characters with a letter and a number.'
+              errors.password?.message ?? 'At least 8 characters with a letter and a number.'
             }
           />
           <TextField

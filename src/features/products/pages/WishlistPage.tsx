@@ -1,11 +1,12 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { Alert, Button, Container, Paper, Typography } from '@mui/material';
-import { FavoriteBorder } from '@mui/icons-material';
 import { useWishlistStore } from '@/store/wishlist.store';
 import { useWishlistProducts } from '@/api/wishlist.api';
 import ProductGrid from '@/features/products/components/ProductGrid';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import { WishlistEmptyIllustration } from '@/components/illustrations';
+import Seo from '@/components/seo/Seo';
 
 const WishlistPage = () => {
   const items = useWishlistStore((state) => state.items);
@@ -14,6 +15,11 @@ const WishlistPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Seo
+        title="My Wishlist"
+        description="Your saved Classic Watch Pro timepieces — revisit and purchase them whenever you like."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         My Wishlist
       </Typography>
@@ -26,7 +32,7 @@ const WishlistPage = () => {
       {productIds.length === 0 ? (
         <Paper variant="outlined">
           <EmptyState
-            icon={<FavoriteBorder sx={{ fontSize: 56, color: 'text.disabled' }} />}
+            illustration={<WishlistEmptyIllustration />}
             title="Your wishlist is empty"
             message="Tap the heart on any timepiece to save it here for later."
             action={

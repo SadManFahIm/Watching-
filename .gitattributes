@@ -1,0 +1,2 @@
+# Shell hooks must stay LF on every platform — CRLF breaks `sh -e`.
+.husky/* text eol=lf

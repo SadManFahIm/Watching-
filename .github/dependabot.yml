@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # Keep runtime + toolchain dependencies patched and reviewed weekly.
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: 'Asia/Dhaka'
+    open-pull-requests-limit: 10
+    versioning-strategy: auto
+    groups:
+      production-dependencies:
+        dependency-type: production
+        update-types:
+          - patch
+          - minor
+      dev-toolchain:
+        dependency-type: development
+        update-types:
+          - patch
+          - minor
+
+  # Keep the CI workflows themselves on maintained action versions.
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: 'Asia/Dhaka'
+    open-pull-requests-limit: 5

@@ -37,6 +37,7 @@ import { useNotificationsStore } from '@/store/notifications.store';
 import { getApiErrorMessage } from '@/lib/axios';
 import { formatCurrency } from '@/utils/helpers';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import type { Order } from '@/types';
 
 const COUNTRIES = [
@@ -160,6 +161,11 @@ const CheckoutPage = () => {
   if (items.length === 0 && activeStep === 0) {
     return (
       <Container maxWidth="md" sx={{ py: 4 }}>
+        <Seo
+          title="Checkout"
+          description="Complete your Classic Watch Pro order securely."
+          noindex
+        />
         <EmptyState
           title="Nothing to check out"
           message="Your cart is empty. Add a timepiece before proceeding to checkout."
@@ -176,6 +182,11 @@ const CheckoutPage = () => {
   if (!user) {
     return (
       <Container maxWidth="sm" sx={{ py: 6, textAlign: 'center' }}>
+        <Seo
+          title="Checkout"
+          description="Complete your Classic Watch Pro order securely."
+          noindex
+        />
         <Alert severity="info" sx={{ mb: 2 }}>
           Please sign in to complete your order.
         </Alert>
@@ -273,6 +284,7 @@ const CheckoutPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Seo title="Checkout" description="Complete your Classic Watch Pro order securely." noindex />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
         Checkout
       </Typography>

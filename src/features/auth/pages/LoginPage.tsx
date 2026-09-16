@@ -19,6 +19,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
 import AuthLayout from '@/features/auth/components/AuthLayout';
+import Seo from '@/components/seo/Seo';
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Email is required').email('Enter a valid email address'),
@@ -125,6 +126,11 @@ const LoginPage = () => {
   if (pendingMfa) {
     return (
       <AuthLayout>
+        <Seo
+          title="Two-factor authentication"
+          description="Confirm it's you with a second factor to continue to your Classic Watch Pro account."
+          noindex
+        />
         <Typography variant="h4" component="h1" fontWeight={800}>
           Two-factor authentication
         </Typography>
@@ -164,7 +170,9 @@ const LoginPage = () => {
               size="large"
               fullWidth
               disabled={mfaSubmitting || mfaCode.length < 6}
-              startIcon={mfaSubmitting ? <CircularProgress size={18} color="inherit" /> : <KeyOutlined />}
+              startIcon={
+                mfaSubmitting ? <CircularProgress size={18} color="inherit" /> : <KeyOutlined />
+              }
             >
               {mfaSubmitting ? 'Verifying…' : 'Verify code'}
             </Button>
@@ -180,11 +188,7 @@ const LoginPage = () => {
                 Use a passkey instead
               </Button>
             )}
-            <Button
-              size="small"
-              disabled={mfaSubmitting}
-              onClick={() => void signOut()}
-            >
+            <Button size="small" disabled={mfaSubmitting} onClick={() => void signOut()}>
               Use a different account
             </Button>
           </Stack>
@@ -195,6 +199,11 @@ const LoginPage = () => {
 
   return (
     <AuthLayout>
+      <Seo
+        title="Sign In"
+        description="Sign in to your Classic Watch Pro account to manage your collection, track orders and save your favourite timepieces."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={800}>
         Welcome back
       </Typography>

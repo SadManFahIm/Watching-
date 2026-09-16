@@ -22,6 +22,7 @@ import { useAuthStore } from '@/store/auth.store';
 import { getApiErrorMessage } from '@/lib/axios';
 import { ORDER_FLOW, ORDER_STATUS_LABELS, PAYMENT_META } from '@/features/orders/constants';
 import AuditTimeline from '@/features/orders/components/AuditTimeline';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency, formatDate } from '@/utils/helpers';
 
 const OrderDetailPage = () => {
@@ -84,6 +85,11 @@ const OrderDetailPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Seo
+        title={`Order ${order.id.toUpperCase()}`}
+        description={`Track your Classic Watch Pro order ${order.id.toUpperCase()} — ${ORDER_STATUS_LABELS[order.orderStatus]}.`}
+        noindex
+      />
       <Button
         component={RouterLink}
         to="/dashboard/orders"

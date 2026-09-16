@@ -14,6 +14,8 @@ import { Add, ArrowBack, DeleteOutline, Remove, Watch } from '@mui/icons-materia
 import { useCartStore } from '@/store/cart.store';
 import { formatCurrency } from '@/utils/helpers';
 import EmptyState from '@/components/common/EmptyState';
+import { CartEmptyIllustration } from '@/components/illustrations';
+import Seo from '@/components/seo/Seo';
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -25,12 +27,18 @@ const CartPage = () => {
   if (items.length === 0) {
     return (
       <Container maxWidth="md" sx={{ py: 4 }}>
+        <Seo
+          title="Shopping Cart"
+          description="Your Classic Watch Pro shopping cart — review your selected timepieces and proceed to checkout."
+          noindex
+        />
         <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
           Shopping Cart
         </Typography>
         <EmptyState
           title="Your cart is empty"
           message="Browse the collection and add a timepiece you love — your cart is waiting."
+          illustration={<CartEmptyIllustration />}
           action={
             <Button variant="contained" component={RouterLink} to="/products" size="large">
               Explore products
@@ -43,6 +51,11 @@ const CartPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Seo
+        title="Shopping Cart"
+        description="Your Classic Watch Pro shopping cart — review your selected timepieces and proceed to checkout."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
         Shopping Cart
       </Typography>

@@ -36,6 +36,7 @@ import { useAuthStore } from '@/store/auth.store';
 import AuditTimeline from '@/features/orders/components/AuditTimeline';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import { formatDate } from '@/utils/helpers';
 import type { User } from '@/types';
 
@@ -84,6 +85,12 @@ const ManageUsersPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Manage Users"
+        description="Manage registered users and admin access for Classic Watch Pro."
+        noindex
+        nofollow
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         Users
       </Typography>

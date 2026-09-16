@@ -8,6 +8,8 @@ import OrderStatusBadge from '@/features/orders/components/OrderStatusBadge';
 import { PAYMENT_META } from '@/features/orders/constants';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import { OrdersEmptyIllustration } from '@/components/illustrations';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency, formatDate } from '@/utils/helpers';
 
 type StatusFilter = 'all' | OrderStatus;
@@ -32,6 +34,11 @@ const MyOrdersPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="My Orders"
+        description="Track shipments, review details and manage your Classic Watch Pro orders."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
         My Orders
       </Typography>
@@ -68,6 +75,7 @@ const MyOrdersPage = () => {
       ) : visibleOrders.length === 0 ? (
         <Paper variant="outlined">
           <EmptyState
+            illustration={<OrdersEmptyIllustration />}
             title={filter === 'all' ? 'No orders yet' : `No ${filter} orders`}
             message={
               filter === 'all'

@@ -22,6 +22,8 @@ import ProductSort from '@/features/products/components/ProductSort';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
 import LoadingScreen from '@/components/common/LoadingScreen';
+import { SearchEmptyIllustration } from '@/components/illustrations';
+import Seo from '@/components/seo/Seo';
 
 const ProductFilters = lazy(() => import('@/features/products/components/ProductFilters'));
 
@@ -64,6 +66,16 @@ const ProductsPage = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 3 }}>
+      <Seo
+        title={isSearching ? `Search results for "${query}"` : 'Shop Watches'}
+        description={
+          isSearching
+            ? `Search results for "${query}" — browse matching timepieces at Classic Watch Pro.`
+            : 'Shop our complete collection of luxury, classic, sport, casual and smart watches. Filter by price, brand, category and rating.'
+        }
+        noindex={isSearching}
+        keywords={['watches', 'timepieces', 'luxury watches', 'classic watches', 'watch store']}
+      />
       {/* Page header */}
       <Stack
         direction="row"
@@ -159,6 +171,7 @@ const ProductsPage = () => {
                   ? 'Try a different keyword or browse the full catalog instead.'
                   : 'Try adjusting or clearing the active filters.'
               }
+              illustration={<SearchEmptyIllustration />}
               action={
                 isSearching ? (
                   <Button variant="contained" onClick={goToCatalog}>

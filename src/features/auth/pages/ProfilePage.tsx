@@ -32,6 +32,7 @@ import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
 import { formatDate } from '@/utils/helpers';
 import { webauthnSupported } from '@/lib/webauthn';
+import Seo from '@/components/seo/Seo';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -100,6 +101,11 @@ const ProfilePage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Profile"
+        description="Manage your Classic Watch Pro account, security and preferences."
+        noindex
+      />
       <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
         Profile
       </Typography>

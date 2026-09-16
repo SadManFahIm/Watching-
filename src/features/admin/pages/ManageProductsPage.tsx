@@ -25,6 +25,7 @@ import { useProducts, useDeleteProduct } from '@/api/products.api';
 import { useCartStore } from '@/store/cart.store';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
+import Seo from '@/components/seo/Seo';
 import { formatCurrency } from '@/utils/helpers';
 import type { Product } from '@/types';
 
@@ -56,6 +57,12 @@ const ManageProductsPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Manage Products"
+        description="Manage the Classic Watch Pro catalog."
+        noindex
+        nofollow
+      />
       <Stack
         direction="row"
         alignItems="center"
@@ -67,7 +74,12 @@ const ManageProductsPage = () => {
         <Typography variant="h4" component="h1" fontWeight={700}>
           Products
         </Typography>
-        <Button variant="contained" component={RouterLink} to="/admin/products/add" startIcon={<Add />}>
+        <Button
+          variant="contained"
+          component={RouterLink}
+          to="/admin/products/add"
+          startIcon={<Add />}
+        >
           Add product
         </Button>
       </Stack>
@@ -109,9 +121,7 @@ const ManageProductsPage = () => {
           <EmptyState
             title={query ? `No products match “${query}”` : 'No products yet'}
             message={
-              query
-                ? 'Try a different search term.'
-                : 'Add your first timepiece to start selling.'
+              query ? 'Try a different search term.' : 'Add your first timepiece to start selling.'
             }
             action={
               !query ? (
@@ -210,7 +220,12 @@ const ManageProductsPage = () => {
                       />
                     </TableCell>
                     <TableCell align="center">
-                      <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="center">
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        alignItems="center"
+                        justifyContent="center"
+                      >
                         <Star sx={{ fontSize: 15, color: 'warning.main' }} />
                         <Typography variant="body2" fontWeight={600}>
                           {product.rating > 0 ? product.rating.toFixed(1) : '—'}
@@ -247,7 +262,6 @@ const ManageProductsPage = () => {
           </Table>
         </TableContainer>
       )}
-
     </Box>
   );
 };

@@ -38,6 +38,7 @@ import { useAllOrders } from '@/api/orders.api';
 import { useUsers } from '@/api/users.api';
 import { useProducts } from '@/api/products.api';
 import { PRODUCTS_PAGE_SIZE } from '@/features/products/constants';
+import Seo from '@/components/seo/Seo';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { resetMockDb, exportMockDbBackup, importMockDbBackup } from '@/mocks/data';
@@ -249,6 +250,12 @@ const AdminDashboardPage = () => {
 
   return (
     <Box>
+      <Seo
+        title="Admin Console"
+        description="Classic Watch Pro admin console — overview, orders, products, users and reviews."
+        noindex
+        nofollow
+      />
       <Stack
         direction="row"
         alignItems="center"

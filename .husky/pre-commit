@@ -1,0 +1,4 @@
+# Pre-commit: stage-scoped hygiene before anything reaches a MR.
+
+npx lint-staged
+exec npm run type-check
