@@ -25,7 +25,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",
-    "@mui/icons-material": "^6.1.6",
+    "@mui/icons-material": "^9.4.0",
     "@mui/material": "^6.1.6",
     "@sentry/react": "^10.74.0",
     "@simplewebauthn/browser": "^14.0.0",
