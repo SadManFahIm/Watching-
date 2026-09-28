@@ -16,7 +16,6 @@ export const initTelemetry = async (): Promise<void> => {
       dsn,
       environment: import.meta.env.MODE,
       tracesSampleRate: import.meta.env.DEV ? 1.0 : 0.1,
-      sendDefaultPii: false,
     });
   } catch (error) {
     // Non-fatal: logging must never break the app boot.
