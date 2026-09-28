@@ -5,6 +5,10 @@ import { ServerErrorIllustration } from '@/components/illustrations';
 import Seo from '@/components/seo/Seo';
 
 const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+  const thrownError = error instanceof Error ? error : null;
+  const errorMessage = thrownError?.message ?? String(error);
+  const errorStack = thrownError?.stack;
+
   return (
     <Box component="main">
       <Container maxWidth="md" sx={{ py: { xs: 5, md: 9 } }}>
@@ -59,9 +63,9 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
                   color: 'error.dark',
                 }}
               >
-                {error.message}
+                {errorMessage}
               </Typography>
-              {error.stack && (
+              {errorStack && (
                 <Typography
                   variant="caption"
                   component="pre"
@@ -73,7 +77,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
                     mt: 1,
                   }}
                 >
-                  {error.stack}
+                  {errorStack}
                 </Typography>
               )}
             </Box>

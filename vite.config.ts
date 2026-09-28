@@ -4,15 +4,63 @@ import react from '@vitejs/plugin-react-swc';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 
+// Vite 8 bundles with Rolldown, which only accepts the function form of
+// `manualChunks` (the object form was a Rollup-only convenience). Each entry
+// maps a node_modules package to the vendor chunk it belongs in; the regex
+// lists the shared transitive deps so the split matches the old object form.
+const VENDOR_CHUNKS: { name: string; test: RegExp }[] = [
+  {
+    name: 'react-vendor',
+    test: /node_modules[\\/](react|react-dom|react-router|react-router-dom|scheduler|loose-envify|js-tokens|@remix-run[\\/]router)[\\/]/,
+  },
+  {
+    name: 'mui-vendor',
+    test: /node_modules[\\/](@mui[\\/][^\\/]+|@emotion[\\/][^\\/]+|@popperjs[\\/]core|clsx|prop-types|react-is|react-transition-group|@babel[\\/]runtime)[\\/]/,
+  },
+  { name: 'firebase-vendor', test: /node_modules[\\/]firebase[\\/]/ },
+  { name: 'query-vendor', test: /node_modules[\\/]@tanstack[\\/]react-query[^\\/]*[\\/]/ },
+  {
+    name: 'form-vendor',
+    test: /node_modules[\\/](react-hook-form|zod|@hookform[\\/]resolvers)[\\/]/,
+  },
+];
+
+const manualChunks = (id: string): string | undefined =>
+  VENDOR_CHUNKS.find(({ test }) => test.test(id))?.name;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   test: {
-    environment: 'node',
-    environmentMatchGlobs: [
-      ['src/features/**/*.test.tsx', 'jsdom'],
-      ['src/components/**/*.test.tsx', 'jsdom'],
+    // Vitest 5 removed `environmentMatchGlobs`; per-environment file routing is
+    // now expressed with `projects`. This keeps the previous split: component and
+    // feature specs run in jsdom, everything else in plain node.
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'dom',
+          environment: 'jsdom',
+          include: ['src/features/**/*.test.tsx', 'src/components/**/*.test.tsx'],
+          // The a11y suite renders whole pages and runs axe-core over the full
+          // DOM, which regularly exceeds Vitest's 5s default on a loaded runner.
+          testTimeout: 30000,
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          environment: 'node',
+          include: ['src/**/*.{test,spec}.{ts,tsx}'],
+          exclude: [
+            '**/node_modules/**',
+            '**/dist/**',
+            'src/features/**/*.test.tsx',
+            'src/components/**/*.test.tsx',
+          ],
+        },
+      },
     ],
-    include: ['src/**/*.{test,spec}.{ts,tsx}'],
     setupFiles: ['./src/test/setup.ts', './src/test/setup-jsdom.ts'],
     coverage: {
       reporter: ['text', 'html'],
@@ -107,13 +155,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'mui-vendor': ['@mui/material', '@mui/icons-material'],
-          'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
-          'query-vendor': ['@tanstack/react-query'],
-          'form-vendor': ['react-hook-form', 'zod', '@hookform/resolvers'],
-        },
+        manualChunks,
       },
     },
     chunkSizeWarningLimit: 1000,
