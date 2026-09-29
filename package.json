@@ -24,7 +24,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@hookform/resolvers": "^3.9.0",
+    "@hookform/resolvers": "^5.9.1",
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@sentry/react": "^11.1.0",
@@ -39,11 +39,11 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^6.1.6",
     "react-helmet-async": "^3.0.0",
-    "react-hook-form": "7.88.0",
+    "react-hook-form": "7.89.0",
     "react-hot-toast": "^2.6.1",
     "react-intersection-observer": "^11.0.1",
     "react-router-dom": "^7.18.4",
-    "zod": "^3.23.8",
+    "zod": "^4.6.5",
     "zustand": "^5.0.0"
   },
   "devDependencies": {
