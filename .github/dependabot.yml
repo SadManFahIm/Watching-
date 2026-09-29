@@ -1,2 +1,149 @@
 version: 2
-updates: []
+
+# Groups mirror the peer-dependency clusters in package.json. Dependabot only
+# applies peer resolution inside a single PR, so packages that pin each other
+# (e.g. @vitest/ui peer-pins an exact vitest release) must land together or the
+# PR fails `npm ci` with ERESOLVE.
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Asia/Dhaka
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    commit-message:
+      prefix: "chore(deps)"
+    # keep ^ranges tight instead of widening them on every lockfile bump
+    versioning-strategy: increase-if-necessary
+    groups:
+      # eslint and every plugin peer-pin the eslint major.
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/js"
+          - "eslint-plugin-*"
+          - "@typescript-eslint/*"
+          - "globals"
+      # @vitest/ui peer-pins an exact vitest version - never split these.
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+      # Vite plugins peer-pin the vite major.
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+          - "workbox-*"
+      # react-error-boundary and @testing-library/react peer on react/@types/react.
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "@testing-library/react"
+          - "react-error-boundary"
+      # MUI and Emotion ship as a matched set.
+      mui:
+        patterns:
+          - "@mui/*"
+          - "@emotion/*"
+      # The devtools bundle must match the installed query-core version.
+      tanstack:
+        patterns:
+          - "@tanstack/*"
+      # Everything left in dependencies.
+      production:
+        dependency-type: production
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "eslint-plugin-*"
+          - "@typescript-eslint/*"
+          - "globals"
+          - "vitest"
+          - "@vitest/*"
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+          - "workbox-*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "@testing-library/react"
+          - "react-error-boundary"
+          - "@mui/*"
+          - "@emotion/*"
+          - "@tanstack/*"
+      # Everything left in devDependencies.
+      dev-toolchain:
+        dependency-type: development
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "eslint-plugin-*"
+          - "@typescript-eslint/*"
+          - "globals"
+          - "vitest"
+          - "@vitest/*"
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+          - "workbox-*"
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+          - "@testing-library/react"
+          - "react-error-boundary"
+          - "@mui/*"
+          - "@emotion/*"
+          - "@tanstack/*"
+    # These majors required source/config migration rather than a version bump,
+    # so an automated PR for them is expected to go red until that work is done
+    # by hand (see #37). They are released deliberately instead of unattended.
+    ignore:
+      - dependency-name: eslint
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: vite
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: vitest
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: react-error-boundary
+        update-types:
+          - "version-update:semver-major"
+      - dependency-name: "@sentry/react"
+        update-types:
+          - "version-update:semver-major"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Asia/Dhaka
+    open-pull-requests-limit: 2
+    labels:
+      - dependencies
+      - ci
+    commit-message:
+      prefix: "ci"
+    groups:
+      actions:
+        patterns:
+          - "*"
