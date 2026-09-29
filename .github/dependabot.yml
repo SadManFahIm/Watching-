@@ -20,13 +20,16 @@ updates:
     # keep ^ranges tight instead of widening them on every lockfile bump
     versioning-strategy: increase-if-necessary
     groups:
-      # eslint and every plugin peer-pin the eslint major.
+      # eslint and every plugin peer-pin the eslint major. @typescript-eslint
+      # also peer-pins typescript (>=4.8.4 <6.1.0 at 8.71.0), so typescript
+      # has to move with them or a major bump resolves to an unbuildable tree.
       eslint:
         patterns:
           - "eslint"
           - "@eslint/js"
           - "eslint-plugin-*"
           - "@typescript-eslint/*"
+          - "typescript"
           - "globals"
       # @vitest/ui peer-pins an exact vitest version - never split these.
       vitest:
@@ -68,6 +71,7 @@ updates:
           - "@eslint/*"
           - "eslint-plugin-*"
           - "@typescript-eslint/*"
+          - "typescript"
           - "globals"
           - "vitest"
           - "@vitest/*"
@@ -94,6 +98,7 @@ updates:
           - "@eslint/*"
           - "eslint-plugin-*"
           - "@typescript-eslint/*"
+          - "typescript"
           - "globals"
           - "vitest"
           - "@vitest/*"
