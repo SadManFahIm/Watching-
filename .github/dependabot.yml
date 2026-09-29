@@ -118,7 +118,12 @@ updates:
     # These majors required source/config migration rather than a version bump,
     # so an automated PR for them is expected to go red until that work is done
     # by hand (see #37). They are released deliberately instead of unattended.
+    # typescript is here for the same reason: @typescript-eslint peer-caps it at
+    # <6.1.0 and has no TS 7 release, so a 7.x bump cannot resolve at all.
     ignore:
+      - dependency-name: typescript
+        update-types:
+          - "version-update:semver-major"
       - dependency-name: eslint
         update-types:
           - "version-update:semver-major"
