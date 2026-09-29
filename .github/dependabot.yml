@@ -115,30 +115,46 @@ updates:
           - "@mui/*"
           - "@emotion/*"
           - "@tanstack/*"
-    # These majors required source/config migration rather than a version bump,
-    # so an automated PR for them is expected to go red until that work is done
-    # by hand (see #37). They are released deliberately instead of unattended.
-    # typescript is here for the same reason: @typescript-eslint peer-caps it at
-    # <6.1.0 and has no TS 7 release, so a 7.x bump cannot resolve at all.
-    ignore:
+    # These six majors need source/config migration rather than a version bump,
+    # so an automated PR would go red until that work is done by hand (see #37).
+    # They are released deliberately instead of unattended.
+    #
+    # Expressed as `allow` + minor/patch rather than `ignore` + semver-major on
+    # purpose. `ignore` suppresses security updates as well as version updates,
+    # so a major-version security fix would never surface. `update-types` only
+    # gates *version* updates - security updates are always raised regardless.
+    # typescript is included for the same migration reason as the rest:
+    # @typescript-eslint peer-caps it at <6.1.0 and has no TS 7 release, so a
+    # 7.x bump cannot resolve at all.
+    allow:
       - dependency-name: typescript
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: eslint
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: vite
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: vitest
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: react-error-boundary
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
       - dependency-name: "@sentry/react"
         update-types:
-          - "version-update:semver-major"
+          - "version-update:semver-minor"
+          - "version-update:semver-patch"
+      # Everything else stays fully automatic. This must stay last and is what
+      # keeps the rules above from acting as a whitelist that silently drops
+      # every other dependency's updates.
+      - dependency-type: direct
 
   - package-ecosystem: github-actions
     directory: /
