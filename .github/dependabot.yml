@@ -60,6 +60,7 @@ updates:
           - "@tanstack/*"
       # Everything left in dependencies.
       production:
+        dependency-type: production
         patterns:
           - "*"
         exclude-patterns:
@@ -85,6 +86,7 @@ updates:
           - "@tanstack/*"
       # Everything left in devDependencies.
       dev-toolchain:
+        dependency-type: development
         patterns:
           - "*"
         exclude-patterns:
