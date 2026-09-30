@@ -48,10 +48,20 @@ const DetailSkeleton = () => (
   <Container maxWidth="lg" sx={{ py: 4 }}>
     <Box className="skeleton" sx={{ width: 180, height: 16, borderRadius: 1, mb: 2 }} />
     <Grid container spacing={4}>
-      <Grid item xs={12} md={6}>
+      <Grid
+        size={{
+          xs: 12,
+          md: 6,
+        }}
+      >
         <Box className="skeleton" sx={{ aspectRatio: '1 / 1', borderRadius: 3 }} />
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid
+        size={{
+          xs: 12,
+          md: 6,
+        }}
+      >
         <Stack spacing={2}>
           <Box className="skeleton" sx={{ width: 120, height: 18, borderRadius: 1 }} />
           <Box className="skeleton" sx={{ width: '85%', height: 30, borderRadius: 1 }} />
@@ -101,13 +111,30 @@ const ProductDetailPage = () => {
     return (
       <Container maxWidth="md" sx={{ py: 8, textAlign: 'center' }}>
         <Watch sx={{ fontSize: 72, color: 'text.disabled', mb: 2 }} />
-        <Typography variant="h5" fontWeight={700} gutterBottom>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Product unavailable
         </Typography>
-        <Typography color="text.secondary" sx={{ mb: 3 }}>
+        <Typography
+          sx={{
+            color: 'text.secondary',
+            mb: 3,
+          }}
+        >
           {getApiErrorMessage(error, 'This product could not be loaded.')}
         </Typography>
-        <Stack direction="row" spacing={2} justifyContent="center">
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            justifyContent: 'center',
+          }}
+        >
           <Button variant="contained" onClick={() => void refetch()}>
             Try again
           </Button>
@@ -213,19 +240,31 @@ const ProductDetailPage = () => {
         <Typography
           component={RouterLink}
           to="/products"
-          color="inherit"
-          sx={{ textDecoration: 'none' }}
+          sx={{
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
         >
           Products
         </Typography>
-        <Typography color="text.primary" textTransform="capitalize">
+        <Typography
+          sx={{
+            color: 'text.primary',
+            textTransform: 'capitalize',
+          }}
+        >
           {product.brand}
         </Typography>
       </Breadcrumbs>
 
       <Grid container spacing={{ xs: 3, md: 5 }}>
         {/* Gallery */}
-        <Grid item xs={12} md={6}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 6,
+          }}
+        >
           <Paper
             variant="outlined"
             sx={{
@@ -280,61 +319,124 @@ const ProductDetailPage = () => {
         </Grid>
 
         {/* Purchase panel */}
-        <Grid item xs={12} md={6}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 6,
+          }}
+        >
           <Typography
             variant="overline"
-            color="text.secondary"
-            fontWeight={700}
-            textTransform="uppercase"
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+            }}
           >
             {product.brand} · {product.category}
           </Typography>
           <Typography
             variant="h3"
             component="h1"
-            fontWeight={700}
-            sx={{ mt: 0.5, fontSize: { xs: '1.8rem', md: '2.3rem' } }}
+            sx={{
+              fontWeight: 700,
+              mt: 0.5,
+              fontSize: { xs: '1.8rem', md: '2.3rem' },
+            }}
           >
             {product.name}
           </Typography>
 
-          <Stack direction="row" alignItems="center" spacing={1} sx={{ mt: 1 }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'center',
+              mt: 1,
+            }}
+          >
             <Star sx={{ color: 'warning.main' }} />
-            <Typography fontWeight={600}>
+            <Typography
+              sx={{
+                fontWeight: 600,
+              }}
+            >
               {product.rating > 0 ? product.rating.toFixed(1) : '—'}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {product.reviewCount > 0
                 ? `${product.reviewCount} verified reviews`
                 : 'No reviews yet'}
             </Typography>
           </Stack>
 
-          <Stack direction="row" alignItems="baseline" spacing={1.5} sx={{ mt: 2 }}>
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{
+              alignItems: 'baseline',
+              mt: 2,
+            }}
+          >
             {/* Price is content, not a heading — avoid a phantom <h4> under the
                 product <h1> (axe heading-order). */}
-            <Typography variant="h4" component="div" fontWeight={800} color="primary.main">
+            <Typography
+              variant="h4"
+              component="div"
+              sx={{
+                fontWeight: 800,
+                color: 'primary.main',
+              }}
+            >
               {formatCurrency(product.price)}
             </Typography>
             {product.originalPrice && product.originalPrice > product.price && (
               <Typography
                 variant="body1"
-                color="text.secondary"
-                sx={{ textDecoration: 'line-through' }}
+                sx={{
+                  color: 'text.secondary',
+                  textDecoration: 'line-through',
+                }}
               >
                 {formatCurrency(product.originalPrice)}
               </Typography>
             )}
           </Stack>
 
-          <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'text.secondary',
+              mt: 2,
+            }}
+          >
             {product.description}
           </Typography>
 
           {/* Trust badges */}
-          <Stack direction="row" flexWrap="wrap" gap={2} sx={{ mt: 2.5, color: 'text.secondary' }}>
+          <Stack
+            direction="row"
+            sx={{
+              flexWrap: 'wrap',
+              gap: 2,
+              mt: 2.5,
+              color: 'text.secondary',
+            }}
+          >
             {TrustBadges.map((badge) => (
-              <Stack key={badge.label} direction="row" spacing={0.5} alignItems="center">
+              <Stack
+                key={badge.label}
+                direction="row"
+                spacing={0.5}
+                sx={{
+                  alignItems: 'center',
+                }}
+              >
                 <badge.icon fontSize="small" color="primary" />
                 <Typography variant="caption">{badge.label}</Typography>
               </Stack>
@@ -350,7 +452,14 @@ const ProductDetailPage = () => {
               when it returns.
             </Alert>
           ) : (
-            <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 2 }}>
+            <Stack
+              direction="row"
+              spacing={2}
+              sx={{
+                alignItems: 'center',
+                mb: 2,
+              }}
+            >
               <Paper variant="outlined" sx={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton
                   onClick={() => handleQuantityChange(-1)}
@@ -370,13 +479,25 @@ const ProductDetailPage = () => {
                   <Add fontSize="small" />
                 </IconButton>
               </Paper>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 {product.stock} in stock
               </Typography>
             </Stack>
           )}
 
-          <Stack direction="row" spacing={1.5} flexWrap="wrap" useFlexGap>
+          <Stack
+            direction="row"
+            spacing={1.5}
+            useFlexGap
+            sx={{
+              flexWrap: 'wrap',
+            }}
+          >
             <Button
               variant="contained"
               size="large"
@@ -407,10 +528,23 @@ const ProductDetailPage = () => {
 
           {product.features.length > 0 && (
             <>
-              <Typography variant="subtitle1" fontWeight={700} sx={{ mt: 3, mb: 1 }}>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 700,
+                  mt: 3,
+                  mb: 1,
+                }}
+              >
                 Highlights
               </Typography>
-              <Stack direction="row" flexWrap="wrap" gap={0.75}>
+              <Stack
+                direction="row"
+                sx={{
+                  flexWrap: 'wrap',
+                  gap: 0.75,
+                }}
+              >
                 {product.features.map((feature) => (
                   <Chip
                     key={feature}
@@ -428,7 +562,14 @@ const ProductDetailPage = () => {
 
       {/* Specifications */}
       <Paper variant="outlined" sx={{ mt: 6, p: { xs: 2, md: 4 } }}>
-        <Typography variant="h5" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{
+            fontWeight: 700,
+            mb: 2,
+          }}
+        >
           Specifications
         </Typography>
         <Table size="small">
@@ -455,7 +596,14 @@ const ProductDetailPage = () => {
       {/* Related */}
       {related.length > 0 && (
         <Box sx={{ mt: 7 }}>
-          <Typography variant="h5" component="h2" fontWeight={700} sx={{ mb: 3 }}>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              mb: 3,
+            }}
+          >
             You may also like
           </Typography>
           {featuredQuery.isLoading ? (

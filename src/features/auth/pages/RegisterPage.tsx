@@ -67,10 +67,22 @@ const RegisterPage = () => {
         description="Create your Classic Watch Pro account for member pricing, order tracking and exclusive releases."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={800}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 800,
+        }}
+      >
         Create your account
       </Typography>
-      <Typography color="text.secondary" sx={{ mt: 0.5, mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mt: 0.5,
+          mb: 3,
+        }}
+      >
         Join Classic Watch Pro for member pricing, order tracking, and exclusive releases.
       </Typography>
 
@@ -143,14 +155,23 @@ const RegisterPage = () => {
         </Stack>
       </Box>
 
-      <Typography variant="body2" color="text.secondary" sx={{ mt: 3, textAlign: 'center' }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'text.secondary',
+          mt: 3,
+          textAlign: 'center',
+        }}
+      >
         Already have an account?{' '}
         <Typography
           component={RouterLink}
           to="/login"
-          color="primary.main"
-          fontWeight={700}
-          sx={{ textDecoration: 'none' }}
+          sx={{
+            color: 'primary.main',
+            fontWeight: 700,
+            textDecoration: 'none',
+          }}
         >
           Sign in
         </Typography>

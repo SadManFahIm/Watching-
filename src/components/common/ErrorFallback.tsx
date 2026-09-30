@@ -19,21 +19,45 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
           nofollow
         />
 
-        <Stack alignItems="center" spacing={2.5} sx={{ textAlign: 'center', pt: { xs: 2, md: 4 } }}>
+        <Stack
+          spacing={2.5}
+          sx={{
+            alignItems: 'center',
+            textAlign: 'center',
+            pt: { xs: 2, md: 4 },
+          }}
+        >
           <ServerErrorIllustration size={176} />
 
           <Box>
             <Typography
               variant="overline"
-              color="secondary.main"
-              sx={{ fontWeight: 700, letterSpacing: '0.28em' }}
+              sx={{
+                color: 'secondary.main',
+                fontWeight: 700,
+                letterSpacing: '0.28em',
+              }}
             >
               Error 500
             </Typography>
-            <Typography variant="h3" component="h1" fontWeight={700} sx={{ mt: 0.5 }}>
+            <Typography
+              variant="h3"
+              component="h1"
+              sx={{
+                fontWeight: 700,
+                mt: 0.5,
+              }}
+            >
               The works are out of order.
             </Typography>
-            <Typography color="text.secondary" sx={{ maxWidth: 540, mx: 'auto', mt: 1.5 }}>
+            <Typography
+              sx={{
+                color: 'text.secondary',
+                maxWidth: 540,
+                mx: 'auto',
+                mt: 1.5,
+              }}
+            >
               An unexpected error stopped the page mid-tick. Try again, or head back to the
               collection.
             </Typography>
@@ -51,7 +75,14 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
               }}
               component="pre"
             >
-              <Typography variant="subtitle2" fontWeight="bold" color="error.dark" gutterBottom>
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+                sx={{
+                  fontWeight: 'bold',
+                  color: 'error.dark',
+                }}
+              >
                 Error Details (Development Only):
               </Typography>
               <Typography

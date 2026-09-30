@@ -24,7 +24,13 @@ const LoadingScreen = ({ message = 'Loading...' }: LoadingScreenProps) => {
     >
       <CircularProgress size={60} thickness={4} />
 
-      <Typography variant="h6" color="text.secondary" fontWeight="medium">
+      <Typography
+        variant="h6"
+        sx={{
+          color: 'text.secondary',
+          fontWeight: 'medium',
+        }}
+      >
         {message}
       </Typography>
     </Box>

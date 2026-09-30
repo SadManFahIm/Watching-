@@ -9,7 +9,13 @@ interface ProductSortProps {
 
 const ProductSort = ({ value, onChange }: ProductSortProps) => {
   return (
-    <Stack direction="row" alignItems="center" spacing={1}>
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        alignItems: 'center',
+      }}
+    >
       {/* FormControl + InputLabel is the accessible pattern MUI supports for
           standalone selects: the label names the combobox (axe
           aria-input-field-name) instead of landing an aria-label on the plain

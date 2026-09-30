@@ -39,14 +39,33 @@ const MyOrdersPage = () => {
         description="Track shipments, review details and manage your Classic Watch Pro orders."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         My Orders
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         Track shipments, review details, and manage active orders.
       </Typography>
 
-      <Stack direction="row" flexWrap="wrap" gap={1} sx={{ mb: 3 }}>
+      <Stack
+        direction="row"
+        sx={{
+          flexWrap: 'wrap',
+          gap: 1,
+          mb: 3,
+        }}
+      >
         {FILTERS.map((item) => (
           <Chip
             key={item.value}
@@ -111,8 +130,19 @@ const MyOrdersPage = () => {
                 }}
               >
                 <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                  <Typography fontWeight={700}>Order #{order.id.toUpperCase()}</Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
+                    Order #{order.id.toUpperCase()}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {formatDate(order.createdAt, 'short')} · {itemCount} item
                     {itemCount === 1 ? '' : 's'}
                   </Typography>
@@ -126,7 +156,12 @@ const MyOrdersPage = () => {
                     />
                   </Stack>
                 </Box>
-                <Typography fontWeight={800} variant="h6">
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 800,
+                  }}
+                >
                   {formatCurrency(order.total)}
                 </Typography>
               </Paper>

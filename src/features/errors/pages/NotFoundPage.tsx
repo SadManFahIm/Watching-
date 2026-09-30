@@ -13,21 +13,45 @@ const NotFoundPage = () => {
         noindex
       />
 
-      <Stack alignItems="center" spacing={2.5} sx={{ textAlign: 'center', pt: { xs: 2, md: 4 } }}>
+      <Stack
+        spacing={2.5}
+        sx={{
+          alignItems: 'center',
+          textAlign: 'center',
+          pt: { xs: 2, md: 4 },
+        }}
+      >
         <NotFoundIllustration size={176} />
 
         <Box>
           <Typography
             variant="overline"
-            color="secondary.main"
-            sx={{ fontWeight: 700, letterSpacing: '0.28em' }}
+            sx={{
+              color: 'secondary.main',
+              fontWeight: 700,
+              letterSpacing: '0.28em',
+            }}
           >
             Error 404
           </Typography>
-          <Typography variant="h3" component="h1" fontWeight={700} sx={{ mt: 0.5 }}>
+          <Typography
+            variant="h3"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+              mt: 0.5,
+            }}
+          >
             This page has stopped keeping time.
           </Typography>
-          <Typography color="text.secondary" sx={{ maxWidth: 540, mx: 'auto', mt: 1.5 }}>
+          <Typography
+            sx={{
+              color: 'text.secondary',
+              maxWidth: 540,
+              mx: 'auto',
+              mt: 1.5,
+            }}
+          >
             The address you followed is broken or no longer exists. The rest of the collection is
             still ticking away — head back to the shop.
           </Typography>

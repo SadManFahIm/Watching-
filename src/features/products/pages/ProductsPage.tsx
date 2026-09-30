@@ -79,16 +79,29 @@ const ProductsPage = () => {
       {/* Page header */}
       <Stack
         direction="row"
-        alignItems="baseline"
-        justifyContent="space-between"
-        flexWrap="wrap"
-        gap={1}
-        sx={{ mb: 0.5 }}
+        sx={{
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 1,
+          mb: 0.5,
+        }}
       >
-        <Typography variant="h4" component="h1" fontWeight={700}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           {isSearching ? 'Search results' : 'Products'}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'text.secondary',
+          }}
+        >
           {isSearching ? `${products.length} found` : `${totalProducts} timepieces`}
         </Typography>
       </Stack>
@@ -106,10 +119,12 @@ const ProductsPage = () => {
       {/* Toolbar */}
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        gap={1.5}
-        sx={{ my: 2 }}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 1.5,
+          my: 2,
+        }}
       >
         <Button
           variant="outlined"
@@ -188,7 +203,12 @@ const ProductsPage = () => {
             <>
               <ProductGrid products={products} priorityCount={4} />
               {!isSearching && totalPages > 1 && (
-                <Stack alignItems="center" sx={{ mt: 4 }}>
+                <Stack
+                  sx={{
+                    alignItems: 'center',
+                    mt: 4,
+                  }}
+                >
                   <Pagination
                     count={totalPages}
                     page={page}
@@ -212,7 +232,7 @@ const ProductsPage = () => {
         anchor="left"
         open={mobileFiltersOpen}
         onClose={() => setMobileFiltersOpen(false)}
-        PaperProps={{ sx: { width: 320, maxWidth: '92vw' } }}
+        slotProps={{ paper: { sx: { width: 320, maxWidth: '92vw' } } }}
       >
         <Suspense fallback={<LoadingScreen />}>
           <Box sx={{ p: 2.5 }}>

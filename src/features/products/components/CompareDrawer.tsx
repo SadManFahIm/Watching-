@@ -74,18 +74,38 @@ const CompareDrawer = () => {
       <Stack spacing={2}>
         <Stack
           direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          flexWrap="wrap"
-          gap={1}
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 1,
+          }}
         >
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'center',
+            }}
+          >
             <CompareArrows color="primary" />
-            <Typography variant="h6" component="h2" fontWeight={700}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               Compare ({items.length}/4)
             </Typography>
           </Stack>
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'center',
+            }}
+          >
             <Button size="small" color="inherit" onClick={clear} disabled={items.length === 0}>
               Clear all
             </Button>
@@ -98,7 +118,14 @@ const CompareDrawer = () => {
         </Stack>
 
         {items.length === 0 ? (
-          <Typography variant="body2" color="text.secondary" sx={{ py: 3, textAlign: 'center' }}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+              py: 3,
+              textAlign: 'center',
+            }}
+          >
             Select up to 4 watches with the compare icon on any product card to see them side by
             side.
           </Typography>

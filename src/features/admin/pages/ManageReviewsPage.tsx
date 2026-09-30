@@ -19,7 +19,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { CheckCircle, DeleteOutline, Search } from '@mui/icons-material';
+import { CheckCircle, DeleteOutlined, Search } from '@mui/icons-material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAllReviews, useDeleteReview } from '@/api/reviews.api';
 import { useProducts } from '@/api/products.api';
@@ -62,10 +62,22 @@ const ManageReviewsPage = () => {
         noindex
         nofollow
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         Reviews
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {rows.length} review{rows.length === 1 ? '' : 's'} · moderate customer feedback and the
         &quot;Verified purchase&quot; programme.
       </Typography>
@@ -77,12 +89,14 @@ const ManageReviewsPage = () => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         sx={{ maxWidth: 460, mb: 2.5 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search fontSize="small" />
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search fontSize="small" />
+              </InputAdornment>
+            ),
+          },
         }}
       />
 
@@ -127,7 +141,13 @@ const ManageReviewsPage = () => {
               {rows.map((review) => (
                 <TableRow key={review.id} hover>
                   <TableCell sx={{ maxWidth: 180 }}>
-                    <Typography variant="body2" fontWeight={600} noWrap>
+                    <Typography
+                      variant="body2"
+                      noWrap
+                      sx={{
+                        fontWeight: 600,
+                      }}
+                    >
                       {productName(review.productId)}
                     </Typography>
                   </TableCell>
@@ -136,7 +156,13 @@ const ManageReviewsPage = () => {
                       <Typography variant="body2" noWrap>
                         {review.userName}
                       </Typography>
-                      <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        sx={{
+                          alignItems: 'center',
+                        }}
+                      >
                         {review.verified ? (
                           <Chip
                             icon={<CheckCircle />}
@@ -166,13 +192,19 @@ const ManageReviewsPage = () => {
                     />
                   </TableCell>
                   <TableCell sx={{ maxWidth: 360 }}>
-                    <Typography variant="body2" fontWeight={600} noWrap>
+                    <Typography
+                      variant="body2"
+                      noWrap
+                      sx={{
+                        fontWeight: 600,
+                      }}
+                    >
                       {review.title}
                     </Typography>
                     <Typography
                       variant="body2"
-                      color="text.secondary"
                       sx={{
+                        color: 'text.secondary',
                         display: '-webkit-box',
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: 'vertical',
@@ -181,7 +213,12 @@ const ManageReviewsPage = () => {
                     >
                       {review.comment}
                     </Typography>
-                    <Typography variant="caption" color="text.disabled">
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: 'text.disabled',
+                      }}
+                    >
                       {formatDate(review.createdAt, 'short')}
                     </Typography>
                   </TableCell>
@@ -193,7 +230,7 @@ const ManageReviewsPage = () => {
                         onClick={() => handleDelete(review)}
                         disabled={deleteReview.isPending}
                       >
-                        <DeleteOutline fontSize="small" />
+                        <DeleteOutlined fontSize="small" />
                       </IconButton>
                     </Tooltip>
                   </TableCell>

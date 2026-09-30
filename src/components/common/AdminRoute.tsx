@@ -42,10 +42,21 @@ const AdminRoute = ({ children }: AdminRouteProps) => {
           }}
         >
           <LockOutlined sx={{ fontSize: 80, color: 'error.main' }} />
-          <Typography variant="h3" fontWeight="bold">
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: 'bold',
+            }}
+          >
             Access Denied
           </Typography>
-          <Typography variant="body1" color="text.secondary" maxWidth="400px">
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'text.secondary',
+              maxWidth: '400px',
+            }}
+          >
             You don't have permission to access this page. This area is restricted to administrators
             only.
           </Typography>

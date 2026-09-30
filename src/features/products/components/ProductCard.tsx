@@ -264,9 +264,11 @@ const ProductCard = ({ product, priority = false }: ProductCardProps) => {
       >
         <Typography
           variant="caption"
-          color="text.secondary"
-          textTransform="uppercase"
-          fontWeight={600}
+          sx={{
+            color: 'text.secondary',
+            textTransform: 'uppercase',
+            fontWeight: 600,
+          }}
         >
           {product.brand}
         </Typography>
@@ -275,24 +277,40 @@ const ProductCard = ({ product, priority = false }: ProductCardProps) => {
         <Typography
           variant="subtitle1"
           component="div"
-          fontWeight={600}
-          lineHeight={1.3}
           className="line-clamp-2"
           title={product.name}
-          // Reserve two lines even for short names — cards in a row stay
-          // equal height and the skeleton swap causes no layout shift.
-          sx={{ minHeight: '2.6em' }}
+          sx={{
+            fontWeight: 600,
+            lineHeight: 1.3,
+            minHeight: '2.6em',
+          }}
         >
           {product.name}
         </Typography>
 
-        <Stack direction="row" alignItems="center" spacing={0.5}>
+        <Stack
+          direction="row"
+          spacing={0.5}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
           <Star sx={{ fontSize: 16, color: 'warning.main' }} />
-          <Typography variant="body2" fontWeight={600}>
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: 600,
+            }}
+          >
             {product.rating > 0 ? product.rating.toFixed(1) : '—'}
           </Typography>
           {product.reviewCount > 0 && (
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               ({product.reviewCount})
             </Typography>
           )}
@@ -300,15 +318,29 @@ const ProductCard = ({ product, priority = false }: ProductCardProps) => {
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <Stack direction="row" alignItems="baseline" spacing={1}>
-          <Typography variant="subtitle1" fontWeight={700} color="primary.main">
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: 'baseline',
+          }}
+        >
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 700,
+              color: 'primary.main',
+            }}
+          >
             {formatCurrency(product.price)}
           </Typography>
           {product.originalPrice && product.originalPrice > product.price && (
             <Typography
               variant="caption"
-              color="text.secondary"
-              sx={{ textDecoration: 'line-through' }}
+              sx={{
+                color: 'text.secondary',
+                textDecoration: 'line-through',
+              }}
             >
               {formatCurrency(product.originalPrice)}
             </Typography>

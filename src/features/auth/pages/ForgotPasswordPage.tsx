@@ -59,10 +59,22 @@ const ForgotPasswordPage = () => {
         description="Reset your Classic Watch Pro account password with a secure, time-limited email link."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={800}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 800,
+        }}
+      >
         Reset your password
       </Typography>
-      <Typography color="text.secondary" sx={{ mt: 0.5, mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mt: 0.5,
+          mb: 3,
+        }}
+      >
         Enter the email on your account and we'll send you a secure reset link.
       </Typography>
 
@@ -78,7 +90,13 @@ const ForgotPasswordPage = () => {
           If an account exists for <strong>{submittedEmail}</strong>, a password reset link is on
           its way. Check your inbox (and spam folder) — the link expires within an hour.
           {mockApiEnabled && (
-            <Box component="span" display="block" sx={{ mt: 1 }}>
+            <Box
+              component="span"
+              sx={{
+                display: 'block',
+                mt: 1,
+              }}
+            >
               Demo tip: sign in again at any time with any password of 4+ characters.
             </Box>
           )}
@@ -134,8 +152,13 @@ const ForgotPasswordPage = () => {
         <Typography
           component={RouterLink}
           to="/login"
-          color="text.secondary"
-          sx={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+          sx={{
+            color: 'text.secondary',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 0.5,
+          }}
         >
           <ArrowBack sx={{ fontSize: 16 }} />
           Back to sign in

@@ -97,20 +97,35 @@ const StatusDonut = ({
         {segments
           .filter((segment) => segment.value > 0)
           .map((segment) => (
-            <Stack key={segment.label} direction="row" spacing={1} alignItems="center">
-              <Box
-                sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: segment.color }}
-              />
+            <Stack
+              key={segment.label}
+              direction="row"
+              spacing={1}
+              sx={{
+                alignItems: 'center',
+              }}
+            >
+              <Box sx={{ width: 10, height: 10, borderRadius: '50%', bgcolor: segment.color }} />
               <Typography variant="body2">
                 {segment.label}{' '}
-                <Typography component="span" fontWeight={700}>
+                <Typography
+                  component="span"
+                  sx={{
+                    fontWeight: 700,
+                  }}
+                >
                   {segment.value}
                 </Typography>
               </Typography>
             </Stack>
           ))}
         {total === 0 && (
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+            }}
+          >
             No orders yet.
           </Typography>
         )}

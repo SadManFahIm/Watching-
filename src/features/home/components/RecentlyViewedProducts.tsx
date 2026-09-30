@@ -15,10 +15,29 @@ const RecentlyViewedProducts = () => {
   return (
     <Box>
       <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-          <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 3,
+          }}
+        >
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'center',
+            }}
+          >
             <History fontSize="small" color="primary" />
-            <Typography variant="h4" component="h2" fontWeight={700}>
+            <Typography
+              variant="h4"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               Recently viewed
             </Typography>
           </Stack>

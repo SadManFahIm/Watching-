@@ -109,7 +109,7 @@ const AddProductPage = () => {
     reset,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<ProductFormValues>({
+  } = useForm<z.input<typeof productSchema>, unknown, ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues: {
       name: '',
@@ -148,7 +148,7 @@ const AddProductPage = () => {
     }
   }, [editingQuery.isSuccess, editingQuery.isError, editingQuery.data, reset, isEdit]);
 
-  const watched = watch();
+  const watched = watch() as ProductFormValues;
   const thumbnailUrl = watched.thumbnail?.trim();
   const showThumbnail = Boolean(thumbnailUrl);
 
@@ -203,7 +203,14 @@ const AddProductPage = () => {
   if (isEdit && !formReady) {
     return (
       <Box>
-        <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+            mb: 3,
+          }}
+        >
           Edit product
         </Typography>
         <SkeletonLoader variant="list" count={5} />
@@ -238,24 +245,49 @@ const AddProductPage = () => {
         <Typography
           component={RouterLink}
           to="/admin/products"
-          color="inherit"
-          sx={{ textDecoration: 'none' }}
+          sx={{
+            color: 'inherit',
+            textDecoration: 'none',
+          }}
         >
           Products
         </Typography>
-        <Typography color="text.primary">{isEdit ? 'Edit product' : 'Add product'}</Typography>
+        <Typography
+          sx={{
+            color: 'text.primary',
+          }}
+        >
+          {isEdit ? 'Edit product' : 'Add product'}
+        </Typography>
       </Breadcrumbs>
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         {isEdit ? 'Edit product' : 'Add a new product'}
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {isEdit
           ? 'Update the details below — changes appear on the storefront immediately.'
           : 'Fill in the details below to list a new timepiece on the storefront.'}
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={8}>
+        <Grid
+          size={{
+            xs: 12,
+            lg: 8,
+          }}
+        >
           <Paper
             variant="outlined"
             component="form"
@@ -263,11 +295,18 @@ const AddProductPage = () => {
             onSubmit={(event) => void handleSubmit(handleSave)(event)}
             sx={{ p: { xs: 2.5, md: 4 } }}
           >
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2.5 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2.5,
+              }}
+            >
               Basics
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   label="Product name"
                   fullWidth
@@ -277,7 +316,12 @@ const AddProductPage = () => {
                   helperText={errors.name?.message}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Brand"
                   fullWidth
@@ -287,7 +331,12 @@ const AddProductPage = () => {
                   helperText={errors.brand?.message}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Model"
                   fullWidth
@@ -297,7 +346,12 @@ const AddProductPage = () => {
                   helperText={errors.model?.message}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <Controller
                   name="category"
                   control={control}
@@ -323,7 +377,12 @@ const AddProductPage = () => {
                   )}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="SKU / reference (optional)"
                   fullWidth
@@ -331,7 +390,7 @@ const AddProductPage = () => {
                   helperText="Assigned automatically"
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   label="Description"
                   fullWidth
@@ -350,37 +409,66 @@ const AddProductPage = () => {
             </Grid>
 
             <Divider sx={{ my: 3.5 }} />
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2.5 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2.5,
+              }}
+            >
               Pricing & inventory
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} lg={4}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                  lg: 4,
+                }}
+              >
                 <TextField
                   label="Selling price"
                   type="number"
                   fullWidth
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  slotProps={{
+                    input: {
+                      startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                    },
                   }}
                   {...register('price')}
                   error={Boolean(errors.price)}
                   helperText={errors.price?.message}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} lg={4}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                  lg: 4,
+                }}
+              >
                 <TextField
                   label="Original price (for discount)"
                   type="number"
                   fullWidth
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                  slotProps={{
+                    input: {
+                      startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                    },
                   }}
                   {...register('originalPrice')}
                   error={Boolean(errors.originalPrice)}
                   helperText={errors.originalPrice?.message ?? 'Leave blank to sell at full price'}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} lg={4}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                  lg: 4,
+                }}
+              >
                 <TextField
                   label="Stock quantity"
                   type="number"
@@ -393,14 +481,31 @@ const AddProductPage = () => {
             </Grid>
 
             <Divider sx={{ my: 3.5 }} />
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2.5 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2.5,
+              }}
+            >
               Specifications
             </Typography>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField label="Movement" fullWidth {...register('movement')} />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Case diameter"
                   fullWidth
@@ -408,7 +513,12 @@ const AddProductPage = () => {
                   {...register('caseDiameter')}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Case material"
                   fullWidth
@@ -416,7 +526,12 @@ const AddProductPage = () => {
                   {...register('caseMaterial')}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Water resistance"
                   fullWidth
@@ -424,7 +539,12 @@ const AddProductPage = () => {
                   {...register('waterResistance')}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Strap material"
                   fullWidth
@@ -432,7 +552,12 @@ const AddProductPage = () => {
                   {...register('strapMaterial')}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 6,
+                }}
+              >
                 <TextField
                   label="Warranty"
                   fullWidth
@@ -440,7 +565,7 @@ const AddProductPage = () => {
                   {...register('warranty')}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <TextField
                   label="Key features (one per line)"
                   fullWidth
@@ -493,9 +618,21 @@ const AddProductPage = () => {
         </Grid>
 
         {/* Side panel: image + flags */}
-        <Grid item xs={12} lg={4}>
+        <Grid
+          size={{
+            xs: 12,
+            lg: 4,
+          }}
+        >
           <Paper variant="outlined" sx={{ p: { xs: 2.5, md: 3 }, position: 'sticky', top: 96 }}>
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Media & flags
             </Typography>
 
@@ -553,11 +690,22 @@ const AddProductPage = () => {
             </Stack>
 
             <Divider sx={{ my: 2.5 }} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {watched.price > 0 && (
                 <>
                   Listed at{' '}
-                  <Typography component="span" fontWeight={800} color="primary.main">
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontWeight: 800,
+                      color: 'primary.main',
+                    }}
+                  >
                     {formatCurrency(watched.price)}
                   </Typography>
                   {watched.originalPrice && watched.originalPrice > watched.price && (
@@ -566,8 +714,10 @@ const AddProductPage = () => {
                       (was{' '}
                       <Typography
                         component="span"
-                        color="text.secondary"
-                        sx={{ textDecoration: 'line-through' }}
+                        sx={{
+                          color: 'text.secondary',
+                          textDecoration: 'line-through',
+                        }}
                       >
                         {formatCurrency(watched.originalPrice)}
                       </Typography>

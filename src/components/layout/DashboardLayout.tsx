@@ -47,7 +47,12 @@ const DashboardLayout = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" fontWeight={700}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
             My Account
           </Typography>
         </Toolbar>

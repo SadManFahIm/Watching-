@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { Add, ArrowBack, DeleteOutline, Remove, Watch } from '@mui/icons-material';
+import { Add, ArrowBack, DeleteOutlined, Remove, Watch } from '@mui/icons-material';
 import { useCartStore } from '@/store/cart.store';
 import { formatCurrency } from '@/utils/helpers';
 import EmptyState from '@/components/common/EmptyState';
@@ -32,7 +32,14 @@ const CartPage = () => {
           description="Your Classic Watch Pro shopping cart — review your selected timepieces and proceed to checkout."
           noindex
         />
-        <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+            mb: 3,
+          }}
+        >
           Shopping Cart
         </Typography>
         <EmptyState
@@ -56,12 +63,24 @@ const CartPage = () => {
         description="Your Classic Watch Pro shopping cart — review your selected timepieces and proceed to checkout."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 3,
+        }}
+      >
         Shopping Cart
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 8,
+          }}
+        >
           <Stack spacing={1.5}>
             {items.map((item) => {
               const maxQuantity = Math.max(1, item.product.stock);
@@ -106,25 +125,39 @@ const CartPage = () => {
                   <Box sx={{ flexGrow: 1, minWidth: 180 }}>
                     <Typography
                       variant="subtitle2"
-                      color="text.secondary"
-                      textTransform="uppercase"
-                      fontWeight={600}
+                      sx={{
+                        color: 'text.secondary',
+                        textTransform: 'uppercase',
+                        fontWeight: 600,
+                      }}
                     >
                       {item.product.brand}
                     </Typography>
                     <Typography
                       component={RouterLink}
                       to={`/products/${item.productId}`}
-                      fontWeight={700}
-                      sx={{ textDecoration: 'none' }}
+                      sx={{
+                        fontWeight: 700,
+                        textDecoration: 'none',
+                      }}
                     >
                       {item.product.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'text.secondary',
+                      }}
+                    >
                       {formatCurrency(item.product.price)} each
                     </Typography>
                     {item.quantity > item.product.stock && (
-                      <Typography variant="caption" color="error.main">
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'error.main',
+                        }}
+                      >
                         Only {item.product.stock} available — quantity adjusted at checkout.
                       </Typography>
                     )}
@@ -156,7 +189,13 @@ const CartPage = () => {
                   </Paper>
 
                   {/* Line total */}
-                  <Typography fontWeight={800} sx={{ minWidth: 92, textAlign: 'right' }}>
+                  <Typography
+                    sx={{
+                      fontWeight: 800,
+                      minWidth: 92,
+                      textAlign: 'right',
+                    }}
+                  >
                     {formatCurrency(lineTotal)}
                   </Typography>
 
@@ -165,7 +204,7 @@ const CartPage = () => {
                     aria-label={`Remove ${item.product.name} from cart`}
                     color="error"
                   >
-                    <DeleteOutline />
+                    <DeleteOutlined />
                   </IconButton>
                 </Paper>
               );
@@ -178,34 +217,94 @@ const CartPage = () => {
         </Grid>
 
         {/* Summary */}
-        <Grid item xs={12} md={4}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 4,
+          }}
+        >
           <Paper variant="outlined" sx={{ p: 3, position: 'sticky', top: 96 }}>
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Order Summary
             </Typography>
             <Stack spacing={1.25}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Subtotal</Typography>
-                <Typography fontWeight={600}>{formatCurrency(total)}</Typography>
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Subtotal
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                  }}
+                >
+                  {formatCurrency(total)}
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Shipping</Typography>
-                <Typography fontWeight={600} color="success.main">
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Shipping
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    color: 'success.main',
+                  }}
+                >
                   Free
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Estimated tax</Typography>
-                <Typography fontWeight={600}>Calculated at checkout</Typography>
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Estimated tax
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                  }}
+                >
+                  Calculated at checkout
+                </Typography>
               </Box>
             </Stack>
             <Divider sx={{ my: 2 }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
               {/* Summary totals are data labels, not document headings. */}
-              <Typography component="div" variant="h6" fontWeight={700}>
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
                 Total
               </Typography>
-              <Typography component="div" variant="h6" fontWeight={800} color="primary.main">
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  fontWeight: 800,
+                  color: 'primary.main',
+                }}
+              >
                 {formatCurrency(total)}
               </Typography>
             </Box>
@@ -219,10 +318,12 @@ const CartPage = () => {
             </Button>
             <Typography
               variant="caption"
-              color="text.secondary"
-              display="block"
-              textAlign="center"
-              sx={{ mt: 1.5 }}
+              sx={{
+                color: 'text.secondary',
+                display: 'block',
+                textAlign: 'center',
+                mt: 1.5,
+              }}
             >
               Secure checkout · 100% authentic guarantee
             </Typography>

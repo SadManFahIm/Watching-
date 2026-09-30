@@ -17,7 +17,7 @@ import {
   DashboardOutlined,
   ReceiptLongOutlined,
   FavoriteBorder,
-  PersonOutline,
+  PersonOutlined,
   AdminPanelSettingsOutlined,
   Inventory2Outlined,
   ListAltOutlined,
@@ -49,7 +49,7 @@ const Sidebar = ({ onNavigate }: { onNavigate?: () => void }) => {
         { label: 'Dashboard', to: '/dashboard', icon: DashboardOutlined },
         { label: 'My Orders', to: '/dashboard/orders', icon: ReceiptLongOutlined },
         { label: 'Wishlist', to: '/wishlist', icon: FavoriteBorder },
-        { label: 'Profile', to: '/profile', icon: PersonOutline },
+        { label: 'Profile', to: '/profile', icon: PersonOutlined },
       ],
     },
   ];
@@ -148,7 +148,7 @@ const Sidebar = ({ onNavigate }: { onNavigate?: () => void }) => {
                   </ListItemIcon>
                   <ListItemText
                     primary={link.label}
-                    primaryTypographyProps={{ fontSize: '0.9rem', fontWeight: 500 }}
+                    slotProps={{ primary: { sx: { fontSize: '0.9rem', fontWeight: 500 } } }}
                   />
                 </ListItemButton>
               </ListItem>
@@ -167,10 +167,22 @@ const Sidebar = ({ onNavigate }: { onNavigate?: () => void }) => {
             {(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
           </Avatar>
           <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-            <Typography variant="subtitle2" noWrap fontWeight={700}>
+            <Typography
+              variant="subtitle2"
+              noWrap
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               {user.displayName || 'User'}
             </Typography>
-            <Typography variant="caption" color="text.secondary" noWrap>
+            <Typography
+              variant="caption"
+              noWrap
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {user.email}
             </Typography>
           </Box>
