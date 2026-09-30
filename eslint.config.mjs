@@ -51,10 +51,11 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
-      // Also new in ESLint 10's eslint:recommended. Tracked as follow-up work so
-      // this upgrade does not silently change the lint contract.
-      'no-useless-assignment': 'off',
-      'preserve-caught-error': 'off',
+      // Also new in ESLint 10's eslint:recommended. Both are enabled: the
+      // violations they surfaced were fixed in #52, so the rules now guard
+      // against regressions rather than merely deferring the cleanup.
+      'no-useless-assignment': 'error',
+      'preserve-caught-error': 'error',
 
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       '@typescript-eslint/no-explicit-any': 'warn',

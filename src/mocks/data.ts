@@ -629,7 +629,7 @@ export const importMockDbBackup = (contents: string): { ok: boolean; error?: str
     futureVersion =
       typeof probe?.schemaVersion === 'number' && probe.schemaVersion > MOCK_DB_SCHEMA_VERSION;
   } catch {
-    futureVersion = false;
+    // Unparseable JSON is not a future-version backup; `futureVersion` stays false.
   }
 
   const payload = parseMockDbPayload(raw);

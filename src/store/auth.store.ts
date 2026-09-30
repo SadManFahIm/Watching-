@@ -223,7 +223,9 @@ export const useAuthStore = create<AuthStore>()(
             }
           }
           set({ isLoading: false });
-          throw new Error(error instanceof Error ? error.message : 'Failed to sign in');
+          throw new Error(error instanceof Error ? error.message : 'Failed to sign in', {
+            cause: error,
+          });
         }
       },
 
@@ -442,7 +444,7 @@ export const useAuthStore = create<AuthStore>()(
             });
             return record;
           } catch (error) {
-            throw new Error(describeWebAuthnError(error));
+            throw new Error(describeWebAuthnError(error), { cause: error });
           }
         }
 
@@ -511,7 +513,9 @@ export const useAuthStore = create<AuthStore>()(
           }
         } catch (error) {
           set({ isLoading: false });
-          throw new Error(error instanceof Error ? error.message : 'Failed to sign up');
+          throw new Error(error instanceof Error ? error.message : 'Failed to sign up', {
+            cause: error,
+          });
         }
       },
 
@@ -551,7 +555,12 @@ export const useAuthStore = create<AuthStore>()(
             }
           }
           set({ isLoading: false });
-          throw new Error(error instanceof Error ? error.message : 'Failed to sign in with Google');
+          throw new Error(
+            error instanceof Error ? error.message : 'Failed to sign in with Google',
+            {
+              cause: error,
+            }
+          );
         }
       },
 
@@ -584,7 +593,9 @@ export const useAuthStore = create<AuthStore>()(
           });
         } catch (error) {
           set({ isLoading: false });
-          throw new Error(error instanceof Error ? error.message : 'Failed to sign out');
+          throw new Error(error instanceof Error ? error.message : 'Failed to sign out', {
+            cause: error,
+          });
         }
       },
 
