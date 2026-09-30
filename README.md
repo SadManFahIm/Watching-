@@ -1,6 +1,6 @@
 # ⌚ Classic Watch Pro
 
-> A **production-grade, security-first luxury watch e-commerce platform** — React 18 · TypeScript · Vite · MUI 6 · Zustand · TanStack Query — that runs fully in **demo mode with zero configuration** and can switch to **real Firebase auth + Firestore** by adding credentials.
+> A **production-grade, security-first luxury watch e-commerce platform** — React 19 · TypeScript · Vite 8 · MUI 9 · Zustand · TanStack Query — that runs fully in **demo mode with zero configuration** and can switch to **real Firebase auth + Firestore** by adding credentials.
 
 ![version](https://img.shields.io/badge/version-3.1.0-212121) ![license](https://img.shields.io/badge/license-MIT-blue) ![tests](https://img.shields.io/badge/tests-164%20passing-success) ![a11y](https://img.shields.io/badge/a11y-WCAG%20AA%20zero%20violations-4CAF50) ![PWA](https://img.shields.io/badge/PWA-ready-5A31F4) ![CI](https://img.shields.io/badge/CI-lint%20%CD%B7%20tsc%20%CD%B7%20tests%20%CD%B7%20build%20%CD%B7%20audit%20%CD%B7%20E2E%20%CD%B7%20Lighthouse-181717) ![Vite](https://img.shields.io/badge/Vite-7-646CFF)
 
@@ -89,9 +89,9 @@ The project was designed to be a **portfolio-quality reference implementation** 
 
 | Area | Choice |
 | ---- | ------ |
-| Language / runtime | TypeScript 5.6 · Node ≥ 18 |
-| Build / dev server | Vite 7 (SWC React plugin) · PWA plugin |
-| UI | React 18 · MUI 6 |
+| Language / runtime | TypeScript 5.6 · Node ≥ 22.12 |
+| Build / dev server | Vite 8 (SWC React plugin) · PWA plugin |
+| UI | React 19 · MUI 9 |
 | Routing | React Router 7 |
 | Client state | Zustand 5 (+ persist middleware) |
 | Server state | TanStack Query 5 |
@@ -167,8 +167,8 @@ See [`docs/FILE_STRUCTURE.md`](./docs/FILE_STRUCTURE.md) for the full tree and [
 
 ## Prerequisites
 
-- **Node.js ≥ 18** (Node 22 recommended for CI parity)
-- **npm ≥ 9**
+- **Node.js ≥ 22.12** (the floor set by Vite 8, Vitest 5 and ESLint 10; CI runs on Node 22)
+- **npm ≥ 10**
 - Git
 
 ---
