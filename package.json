@@ -76,8 +76,8 @@
     "workbox-window": "^7.1.0"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
   },
   "overrides": {
     "undici": "^6.27.1"
