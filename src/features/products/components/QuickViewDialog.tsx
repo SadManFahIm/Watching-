@@ -77,35 +77,77 @@ const QuickViewDialog = ({ product, open, onClose }: QuickViewDialogProps) => {
         <Box sx={{ p: { xs: 2, md: 3 } }}>
           <Typography
             variant="caption"
-            color="text.secondary"
-            fontWeight={700}
-            textTransform="uppercase"
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+            }}
           >
             {product.brand} · {product.category}
           </Typography>
-          <Typography variant="h5" component="h2" fontWeight={700} sx={{ mt: 0.25 }}>
+          <Typography
+            variant="h5"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              mt: 0.25,
+            }}
+          >
             {product.name}
           </Typography>
 
-          <Stack direction="row" alignItems="center" spacing={0.75} sx={{ mt: 0.5 }}>
+          <Stack
+            direction="row"
+            spacing={0.75}
+            sx={{
+              alignItems: 'center',
+              mt: 0.5,
+            }}
+          >
             <Star sx={{ fontSize: 18, color: 'warning.main' }} />
-            <Typography variant="body2" fontWeight={600}>
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: 600,
+              }}
+            >
               {product.rating > 0 ? product.rating.toFixed(1) : '—'}
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {product.reviewCount} review{product.reviewCount === 1 ? '' : 's'}
             </Typography>
           </Stack>
 
-          <Stack direction="row" alignItems="baseline" spacing={1} sx={{ mt: 1 }}>
-            <Typography variant="h6" component="div" fontWeight={800} color="primary.main">
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'baseline',
+              mt: 1,
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                fontWeight: 800,
+                color: 'primary.main',
+              }}
+            >
               {formatCurrency(product.price)}
             </Typography>
             {product.originalPrice && product.originalPrice > product.price && (
               <Typography
                 variant="body2"
-                color="text.secondary"
-                sx={{ textDecoration: 'line-through' }}
+                sx={{
+                  color: 'text.secondary',
+                  textDecoration: 'line-through',
+                }}
               >
                 {formatCurrency(product.originalPrice)}
               </Typography>
@@ -114,8 +156,8 @@ const QuickViewDialog = ({ product, open, onClose }: QuickViewDialogProps) => {
 
           <Typography
             variant="body2"
-            color="text.secondary"
             sx={{
+              color: 'text.secondary',
               mt: 1,
               display: '-webkit-box',
               WebkitLineClamp: 3,
@@ -126,18 +168,43 @@ const QuickViewDialog = ({ product, open, onClose }: QuickViewDialogProps) => {
             {product.description}
           </Typography>
 
-          <Stack direction="row" spacing={2} flexWrap="wrap" useFlexGap sx={{ mt: 1.5 }}>
-            <Typography variant="caption" color="text.secondary">
+          <Stack
+            direction="row"
+            spacing={2}
+            useFlexGap
+            sx={{
+              flexWrap: 'wrap',
+              mt: 1.5,
+            }}
+          >
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               Case: {product.specifications.caseDiameter} · {product.specifications.caseMaterial}
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               Movement: {product.specifications.movement}
             </Typography>
           </Stack>
 
           <Divider sx={{ my: 2 }} />
 
-          <Stack direction="row" spacing={1.5} flexWrap="wrap" useFlexGap>
+          <Stack
+            direction="row"
+            spacing={1.5}
+            useFlexGap
+            sx={{
+              flexWrap: 'wrap',
+            }}
+          >
             <Button
               variant="contained"
               onClick={handleAddToCart}

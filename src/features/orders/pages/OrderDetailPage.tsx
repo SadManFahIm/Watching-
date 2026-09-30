@@ -61,13 +61,30 @@ const OrderDetailPage = () => {
   if (isError || !order) {
     return (
       <Container maxWidth="sm" sx={{ py: 8, textAlign: 'center' }}>
-        <Typography variant="h5" fontWeight={700} gutterBottom>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Order not found
         </Typography>
-        <Typography color="text.secondary" sx={{ mb: 3 }}>
+        <Typography
+          sx={{
+            color: 'text.secondary',
+            mb: 3,
+          }}
+        >
           {getApiErrorMessage(error, 'This order could not be loaded.')}
         </Typography>
-        <Stack direction="row" spacing={2} justifyContent="center">
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            justifyContent: 'center',
+          }}
+        >
           <Button variant="contained" onClick={() => void refetch()}>
             Try again
           </Button>
@@ -101,17 +118,31 @@ const OrderDetailPage = () => {
 
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        flexWrap="wrap"
-        gap={1.5}
-        sx={{ mb: 0.5 }}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 1.5,
+          mb: 0.5,
+        }}
       >
         <Box>
-          <Typography variant="overline" color="text.secondary" fontWeight={700}>
+          <Typography
+            variant="overline"
+            sx={{
+              color: 'text.secondary',
+              fontWeight: 700,
+            }}
+          >
             Order details
           </Typography>
-          <Typography variant="h4" component="h1" fontWeight={700}>
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
             Order #{order.id.toUpperCase()}
           </Typography>
         </Box>
@@ -130,7 +161,12 @@ const OrderDetailPage = () => {
           />
         </Stack>
       </Stack>
-      <Typography color="text.secondary" sx={{ mb: 4 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 4,
+        }}
+      >
         Placed {formatDate(order.createdAt, 'long')} · {itemCount} item{itemCount === 1 ? '' : 's'}
         {order.trackingNumber ? ` · Tracking ${order.trackingNumber}` : ''}
       </Typography>
@@ -145,10 +181,21 @@ const OrderDetailPage = () => {
       )}
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={7}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 7,
+          }}
+        >
           {/* Timeline */}
           <Paper variant="outlined" sx={{ p: 3, mb: 3 }}>
-            <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Order progress
             </Typography>
             <Stepper activeStep={flowIndex >= 0 ? flowIndex : 0} orientation="vertical" nonLinear>
@@ -157,20 +204,27 @@ const OrderDetailPage = () => {
                 return (
                   <Step key={status}>
                     <StepConnector />
-                    <StepLabel StepIconComponent={() => null} optional={null}>
+                    <StepLabel slots={{ stepIcon: () => null }} optional={null}>
                       <Typography
-                        fontWeight={status === order.orderStatus ? 700 : 500}
                         color={
                           order.orderStatus === 'cancelled' && index === 0
                             ? 'text.secondary'
                             : undefined
                         }
+                        sx={{
+                          fontWeight: status === order.orderStatus ? 700 : 500,
+                        }}
                       >
                         {ORDER_STATUS_LABELS[status]}
                       </Typography>
                     </StepLabel>
                     <StepContent>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'text.secondary',
+                        }}
+                      >
                         {reached
                           ? status === order.orderStatus
                             ? 'Current status'
@@ -197,7 +251,13 @@ const OrderDetailPage = () => {
 
           {/* Items */}
           <Paper variant="outlined" sx={{ p: 3 }}>
-            <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Items
             </Typography>
             <Stack divider={<Divider />} spacing={1.5}>
@@ -212,12 +272,27 @@ const OrderDetailPage = () => {
                   }}
                 >
                   <Box>
-                    <Typography fontWeight={600}>{item.product.name}</Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      sx={{
+                        fontWeight: 600,
+                      }}
+                    >
+                      {item.product.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'text.secondary',
+                      }}
+                    >
                       {formatCurrency(item.product.price)} × {item.quantity}
                     </Typography>
                   </Box>
-                  <Typography fontWeight={700}>
+                  <Typography
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     {formatCurrency(item.product.price * item.quantity)}
                   </Typography>
                 </Box>
@@ -233,43 +308,101 @@ const OrderDetailPage = () => {
           )}
         </Grid>
 
-        <Grid item xs={12} md={5}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 5,
+          }}
+        >
           {/* Totals */}
           <Paper variant="outlined" sx={{ p: 3, mb: 3 }}>
-            <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Payment summary
             </Typography>
             <Stack spacing={1}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Subtotal</Typography>
-                <Typography fontWeight={600}>{formatCurrency(order.subtotal)}</Typography>
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Subtotal
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                  }}
+                >
+                  {formatCurrency(order.subtotal)}
+                </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Shipping</Typography>
-                <Typography fontWeight={600}>
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Shipping
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                  }}
+                >
                   {order.shipping === 0 ? 'Free' : formatCurrency(order.shipping)}
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Typography color="text.secondary">Tax</Typography>
-                <Typography fontWeight={600}>{formatCurrency(order.tax)}</Typography>
+                <Typography
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
+                  Tax
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                  }}
+                >
+                  {formatCurrency(order.tax)}
+                </Typography>
               </Box>
             </Stack>
             <Divider sx={{ my: 2 }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant="h6" fontWeight={700}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
                 Total
               </Typography>
-              <Typography variant="h6" fontWeight={800} color="primary.main">
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 800,
+                  color: 'primary.main',
+                }}
+              >
                 {formatCurrency(order.total)}
               </Typography>
             </Box>
             <Typography
               variant="caption"
-              color="text.secondary"
-              display="block"
-              textTransform="capitalize"
-              sx={{ mt: 1 }}
+              sx={{
+                color: 'text.secondary',
+                display: 'block',
+                textTransform: 'capitalize',
+                mt: 1,
+              }}
             >
               Paid via{' '}
               {order.paymentMethod === 'card'
@@ -282,20 +415,47 @@ const OrderDetailPage = () => {
 
           {/* Shipping address */}
           <Paper variant="outlined" sx={{ p: 3 }}>
-            <Typography variant="h6" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Shipping address
             </Typography>
-            <Typography fontWeight={600}>{order.shippingAddress.fullName}</Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              sx={{
+                fontWeight: 600,
+              }}
+            >
+              {order.shippingAddress.fullName}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {order.shippingAddress.addressLine1}
               {order.shippingAddress.addressLine2 ? `, ${order.shippingAddress.addressLine2}` : ''}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {order.shippingAddress.city}
               {order.shippingAddress.state ? `, ${order.shippingAddress.state}` : ''}{' '}
               {order.shippingAddress.postalCode}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {order.shippingAddress.country}
             </Typography>
             <Typography variant="body2" sx={{ mt: 1 }}>

@@ -18,8 +18,21 @@ const FeaturedProducts = () => {
       }}
     >
       <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 3 }}>
-          <Typography variant="h4" component="h2" fontWeight={700}>
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 3,
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+            }}
+          >
             Featured timepieces
           </Typography>
           <Button component={RouterLink} to="/products?sort=rating" color="primary">

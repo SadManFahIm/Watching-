@@ -61,7 +61,14 @@ const SkeletonLoader = ({ count = 6, variant = 'grid' }: SkeletonLoaderProps) =>
   return (
     <Grid container spacing={{ xs: 2, sm: 3 }} role="status" aria-label="Loading products">
       {Array.from({ length: count }, (_, index) => (
-        <Grid item key={index} xs={6} sm={4} lg={3}>
+        <Grid
+          key={index}
+          size={{
+            xs: 6,
+            sm: 4,
+            lg: 3,
+          }}
+        >
           {/* Mirror the real ProductCard block-for-block (image aspect-ratio +
               text rows at the same heights/padding) so the skeleton-to-content
               swap causes zero layout shift. */}

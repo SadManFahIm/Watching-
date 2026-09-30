@@ -258,13 +258,21 @@ const AdminDashboardPage = () => {
       />
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        flexWrap="wrap"
-        gap={1.5}
-        sx={{ mb: 0.5 }}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 1.5,
+          mb: 0.5,
+        }}
       >
-        <Typography variant="h4" component="h1" fontWeight={700}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Admin overview
         </Typography>
         <Stack direction="row" spacing={1} useFlexGap>
@@ -276,7 +284,12 @@ const AdminDashboardPage = () => {
           </Button>
         </Stack>
       </Stack>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         Store health, orders, and inventory at a glance.
       </Typography>
 
@@ -353,7 +366,15 @@ const AdminDashboardPage = () => {
           {/* KPI cards */}
           <Grid container spacing={2.5} sx={{ mb: 4 }}>
             {stats.map((stat) => (
-              <Grid item key={stat.label} xs={12} sm={6} lg={4} xl={2}>
+              <Grid
+                key={stat.label}
+                size={{
+                  xs: 12,
+                  sm: 6,
+                  lg: 4,
+                  xl: 2,
+                }}
+              >
                 <Card variant="outlined">
                   <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Paper
@@ -365,14 +386,22 @@ const AdminDashboardPage = () => {
                       <Typography
                         variant="h6"
                         component="div"
-                        fontWeight={800}
-                        lineHeight={1.2}
                         noWrap
                         title={stat.value}
+                        sx={{
+                          fontWeight: 800,
+                          lineHeight: 1.2,
+                        }}
                       >
                         {stat.value}
                       </Typography>
-                      <Typography variant="body2" component="div" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        component="div"
+                        sx={{
+                          color: 'text.secondary',
+                        }}
+                      >
                         {stat.label}
                       </Typography>
                     </Box>
@@ -385,15 +414,35 @@ const AdminDashboardPage = () => {
           {/* Sales analytics */}
           <Stack
             direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ mt: 4, mb: 2 }}
+            sx={{
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mt: 4,
+              mb: 2,
+            }}
           >
-            <Typography variant="h6" component="h2" fontWeight={700}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               Sales analytics
             </Typography>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <Typography variant="caption" color="text.secondary">
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{
+                alignItems: 'center',
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 Last 6 months · computed from {orders.length} order{orders.length === 1 ? '' : 's'}
               </Typography>
               <Tooltip title="Export report">
@@ -427,9 +476,20 @@ const AdminDashboardPage = () => {
             </Stack>
           </Stack>
           <Grid container spacing={3} sx={{ mb: 4 }}>
-            <Grid item xs={12} md={7}>
+            <Grid
+              size={{
+                xs: 12,
+                md: 7,
+              }}
+            >
               <Paper variant="outlined" sx={{ p: 3 }}>
-                <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 1.5,
+                  }}
+                >
                   Revenue by month
                 </Typography>
                 <SimpleBarChart
@@ -439,9 +499,20 @@ const AdminDashboardPage = () => {
                 />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={5}>
+            <Grid
+              size={{
+                xs: 12,
+                md: 5,
+              }}
+            >
               <Paper variant="outlined" sx={{ p: 3 }}>
-                <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1.5 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 1.5,
+                  }}
+                >
                   Orders by status
                 </Typography>
                 <StatusDonut segments={statusSegments} />
@@ -451,14 +522,27 @@ const AdminDashboardPage = () => {
 
           <Grid container spacing={3}>
             {/* Recent orders */}
-            <Grid item xs={12} lg={7}>
+            <Grid
+              size={{
+                xs: 12,
+                lg: 7,
+              }}
+            >
               <Stack
                 direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{ mb: 2 }}
+                sx={{
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mb: 2,
+                }}
               >
-                <Typography variant="h6" component="h2" fontWeight={700}>
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  sx={{
+                    fontWeight: 700,
+                  }}
+                >
                   Recent orders
                 </Typography>
                 <Button component={RouterLink} to="/admin/orders" size="small">
@@ -491,8 +575,19 @@ const AdminDashboardPage = () => {
                         }}
                       >
                         <Box sx={{ flexGrow: 1, minWidth: 160 }}>
-                          <Typography fontWeight={700}>Order #{order.id.toUpperCase()}</Typography>
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                            }}
+                          >
+                            Order #{order.id.toUpperCase()}
+                          </Typography>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: 'text.secondary',
+                            }}
+                          >
                             {formatDate(order.createdAt, 'short')} · {order.items.length} item
                             {order.items.length === 1 ? '' : 's'}
                           </Typography>
@@ -507,7 +602,13 @@ const AdminDashboardPage = () => {
                           size="small"
                           color={order.orderStatus === 'cancelled' ? 'default' : 'primary'}
                         />
-                        <Typography fontWeight={800}>{formatCurrency(order.total)}</Typography>
+                        <Typography
+                          sx={{
+                            fontWeight: 800,
+                          }}
+                        >
+                          {formatCurrency(order.total)}
+                        </Typography>
                       </Box>
                     ))}
                   </Stack>
@@ -516,16 +617,39 @@ const AdminDashboardPage = () => {
             </Grid>
 
             {/* Inventory health */}
-            <Grid item xs={12} lg={5}>
-              <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+            <Grid
+              size={{
+                xs: 12,
+                lg: 5,
+              }}
+            >
+              <Typography
+                variant="h6"
+                component="h2"
+                sx={{
+                  fontWeight: 700,
+                  mb: 2,
+                }}
+              >
                 Inventory health
               </Typography>
               <Paper variant="outlined" sx={{ p: 2.5, mb: 2.5 }}>
-                <Typography fontWeight={700} sx={{ mb: 1.5 }}>
+                <Typography
+                  sx={{
+                    fontWeight: 700,
+                    mb: 1.5,
+                  }}
+                >
                   Low stock
                 </Typography>
                 {lowStock.length === 0 ? (
-                  <Typography variant="body2" color="success.main" fontWeight={600}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'success.main',
+                      fontWeight: 600,
+                    }}
+                  >
                     All stocked products are healthy — no reorders needed.
                   </Typography>
                 ) : (
@@ -534,9 +658,11 @@ const AdminDashboardPage = () => {
                       <Stack
                         key={product.id}
                         direction="row"
-                        alignItems="center"
-                        justifyContent="space-between"
-                        gap={1}
+                        sx={{
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          gap: 1,
+                        }}
                       >
                         <Typography variant="body2" noWrap sx={{ flexGrow: 1 }}>
                           {product.name}
@@ -561,30 +687,71 @@ const AdminDashboardPage = () => {
                 </Button>
               </Paper>
 
-              <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+              <Typography
+                variant="h6"
+                component="h2"
+                sx={{
+                  fontWeight: 700,
+                  mb: 2,
+                }}
+              >
                 Top customers
               </Typography>
               <Paper variant="outlined" sx={{ p: 2.5, mb: 2.5 }}>
                 {topCustomers.length === 0 ? (
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     No customer spend yet.
                   </Typography>
                 ) : (
                   <Stack spacing={1}>
                     {topCustomers.map((customer, index) => (
-                      <Stack key={customer.name} direction="row" alignItems="center" gap={1.5}>
-                        <Typography fontWeight={800} color="text.secondary" sx={{ width: 20 }}>
+                      <Stack
+                        key={customer.name}
+                        direction="row"
+                        sx={{
+                          alignItems: 'center',
+                          gap: 1.5,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: 800,
+                            color: 'text.secondary',
+                            width: 20,
+                          }}
+                        >
                           {index + 1}
                         </Typography>
                         <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                          <Typography variant="body2" noWrap fontWeight={600}>
+                          <Typography
+                            variant="body2"
+                            noWrap
+                            sx={{
+                              fontWeight: 600,
+                            }}
+                          >
                             {customer.name}
                           </Typography>
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: 'text.secondary',
+                            }}
+                          >
                             {customer.orders} order{customer.orders === 1 ? '' : 's'}
                           </Typography>
                         </Box>
-                        <Typography variant="body2" fontWeight={700}>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 700,
+                          }}
+                        >
                           {formatCurrency(customer.spend)}
                         </Typography>
                       </Stack>
@@ -593,25 +760,55 @@ const AdminDashboardPage = () => {
                 )}
               </Paper>
 
-              <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+              <Typography
+                variant="h6"
+                component="h2"
+                sx={{
+                  fontWeight: 700,
+                  mb: 2,
+                }}
+              >
                 Most reviewed
               </Typography>
               <Paper variant="outlined" sx={{ p: 2.5 }}>
                 {topProducts.length === 0 ? (
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     No products yet.
                   </Typography>
                 ) : (
                   <Stack spacing={1}>
                     {topProducts.map((product, index) => (
-                      <Stack key={product.id} direction="row" alignItems="center" gap={1.5}>
-                        <Typography fontWeight={800} color="text.secondary" sx={{ width: 20 }}>
+                      <Stack
+                        key={product.id}
+                        direction="row"
+                        sx={{
+                          alignItems: 'center',
+                          gap: 1.5,
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontWeight: 800,
+                            color: 'text.secondary',
+                            width: 20,
+                          }}
+                        >
                           {index + 1}
                         </Typography>
                         <Typography variant="body2" noWrap sx={{ flexGrow: 1 }}>
                           {product.name}
                         </Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'text.secondary',
+                          }}
+                        >
                           {product.reviewCount} review{product.reviewCount === 1 ? '' : 's'}
                         </Typography>
                       </Stack>

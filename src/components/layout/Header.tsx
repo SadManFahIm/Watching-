@@ -32,7 +32,7 @@ import {
   DashboardOutlined,
   ReceiptLongOutlined,
   AdminPanelSettingsOutlined,
-  PersonOutline,
+  PersonOutlined,
   Logout,
   NotificationsNoneOutlined,
   NotificationsActiveOutlined,
@@ -109,7 +109,7 @@ const Header = () => {
       anchor="right"
       open={mobileOpen}
       onClose={() => setMobileOpen(false)}
-      PaperProps={{ sx: { width: 300 } }}
+      slotProps={{ paper: { sx: { width: 300 } } }}
     >
       <Box sx={{ p: 2 }}>
         <Box component="form" onSubmit={handleSearchSubmit} sx={{ mb: 2 }}>
@@ -119,8 +119,10 @@ const Header = () => {
             placeholder="Search watches..."
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
-            InputProps={{
-              startAdornment: <Search fontSize="small" sx={{ mr: 1, color: 'text.secondary' }} />,
+            slotProps={{
+              input: {
+                startAdornment: <Search fontSize="small" sx={{ mr: 1, color: 'text.secondary' }} />,
+              },
             }}
           />
         </Box>
@@ -282,7 +284,7 @@ const Header = () => {
             onClose={() => setNotificationAnchor(null)}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
             transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            PaperProps={{ sx: { width: 360, maxHeight: 480, mt: 1 } }}
+            slotProps={{ paper: { sx: { width: 360, maxHeight: 480, mt: 1 } } }}
           >
             <Box
               sx={{
@@ -293,7 +295,12 @@ const Header = () => {
                 alignItems: 'center',
               }}
             >
-              <Typography variant="subtitle2" fontWeight={700}>
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
                 Notifications
               </Typography>
               <Button
@@ -309,7 +316,12 @@ const Header = () => {
             <Divider />
             {notifications.length === 0 ? (
               <Box sx={{ px: 2, py: 3, textAlign: 'center' }}>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
                   You are all caught up.
                 </Typography>
               </Box>
@@ -339,13 +351,18 @@ const Header = () => {
                       }}
                     />
                     <Box sx={{ minWidth: 0 }}>
-                      <Typography variant="subtitle2" fontWeight={notification.read ? 500 : 700}>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: notification.read ? 500 : 700,
+                        }}
+                      >
                         {notification.title}
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
                         sx={{
+                          color: 'text.secondary',
                           display: '-webkit-box',
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: 'vertical',
@@ -354,7 +371,12 @@ const Header = () => {
                       >
                         {notification.message}
                       </Typography>
-                      <Typography variant="caption" color="text.disabled">
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          color: 'text.disabled',
+                        }}
+                      >
                         {getRelativeTime(new Date(notification.timestamp))}
                       </Typography>
                     </Box>
@@ -415,10 +437,22 @@ const Header = () => {
                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               >
                 <Box sx={{ px: 2, py: 1 }}>
-                  <Typography variant="subtitle2" fontWeight={700} noWrap>
+                  <Typography
+                    variant="subtitle2"
+                    noWrap
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     {user.displayName || 'User'}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary" noWrap>
+                  <Typography
+                    variant="caption"
+                    noWrap
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {user.email}
                   </Typography>
                 </Box>
@@ -447,7 +481,7 @@ const Header = () => {
           ) : (
             <>
               {isDesktop && (
-                <Button component={RouterLink} to="/login" startIcon={<PersonOutline />}>
+                <Button component={RouterLink} to="/login" startIcon={<PersonOutlined />}>
                   Sign In
                 </Button>
               )}

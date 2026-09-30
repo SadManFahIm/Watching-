@@ -37,10 +37,12 @@ const IllustrationFrame = ({ size, children }: IllustrationFrameProps) => {
     <Box
       component="svg"
       viewBox="0 0 120 120"
-      width={size}
-      height={size}
       aria-hidden="true"
-      sx={{ display: 'block' }}
+      sx={{
+        width: size,
+        height: size,
+        display: 'block',
+      }}
     >
       <defs>
         <radialGradient id={gradientId} cx="42%" cy="38%" r="70%">

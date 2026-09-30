@@ -19,7 +19,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Add, DeleteOutline, EditOutlined, Search, Star, Watch } from '@mui/icons-material';
+import { Add, DeleteOutlined, EditOutlined, Search, Star, Watch } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 import { useProducts, useDeleteProduct } from '@/api/products.api';
 import { useCartStore } from '@/store/cart.store';
@@ -65,13 +65,21 @@ const ManageProductsPage = () => {
       />
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        flexWrap="wrap"
-        gap={1.5}
-        sx={{ mb: 0.5 }}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 1.5,
+          mb: 0.5,
+        }}
       >
-        <Typography variant="h4" component="h1" fontWeight={700}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Products
         </Typography>
         <Button
@@ -83,7 +91,12 @@ const ManageProductsPage = () => {
           Add product
         </Button>
       </Stack>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {products.length} of {data?.total ?? 0} products
       </Typography>
 
@@ -94,12 +107,14 @@ const ManageProductsPage = () => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         sx={{ maxWidth: 420, mb: 2.5 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search fontSize="small" />
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search fontSize="small" />
+              </InputAdornment>
+            ),
+          },
         }}
       />
 
@@ -156,7 +171,13 @@ const ManageProductsPage = () => {
                 return (
                   <TableRow key={product.id} hover>
                     <TableCell>
-                      <Stack direction="row" alignItems="center" spacing={1.5}>
+                      <Stack
+                        direction="row"
+                        spacing={1.5}
+                        sx={{
+                          alignItems: 'center',
+                        }}
+                      >
                         <Box
                           sx={{
                             width: 44,
@@ -185,13 +206,22 @@ const ManageProductsPage = () => {
                           <Typography
                             component={RouterLink}
                             to={`/products/${product.id}`}
-                            fontWeight={700}
                             noWrap
-                            sx={{ textDecoration: 'none', display: 'block', maxWidth: 260 }}
+                            sx={{
+                              fontWeight: 700,
+                              textDecoration: 'none',
+                              display: 'block',
+                              maxWidth: 260,
+                            }}
                           >
                             {product.name}
                           </Typography>
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: 'text.secondary',
+                            }}
+                          >
                             {product.brand} · {product.model}
                           </Typography>
                         </Box>
@@ -201,12 +231,20 @@ const ManageProductsPage = () => {
                       <Chip label={product.category} size="small" variant="outlined" />
                     </TableCell>
                     <TableCell align="right">
-                      <Typography fontWeight={700}>{formatCurrency(product.price)}</Typography>
+                      <Typography
+                        sx={{
+                          fontWeight: 700,
+                        }}
+                      >
+                        {formatCurrency(product.price)}
+                      </Typography>
                       {product.originalPrice && product.originalPrice > product.price && (
                         <Typography
                           variant="caption"
-                          color="text.secondary"
-                          sx={{ textDecoration: 'line-through' }}
+                          sx={{
+                            color: 'text.secondary',
+                            textDecoration: 'line-through',
+                          }}
                         >
                           {formatCurrency(product.originalPrice)}
                         </Typography>
@@ -223,11 +261,18 @@ const ManageProductsPage = () => {
                       <Stack
                         direction="row"
                         spacing={0.5}
-                        alignItems="center"
-                        justifyContent="center"
+                        sx={{
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
                       >
                         <Star sx={{ fontSize: 15, color: 'warning.main' }} />
-                        <Typography variant="body2" fontWeight={600}>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 600,
+                          }}
+                        >
                           {product.rating > 0 ? product.rating.toFixed(1) : '—'}
                         </Typography>
                       </Stack>
@@ -251,7 +296,7 @@ const ManageProductsPage = () => {
                           disabled={deleteProduct.isPending}
                           onClick={() => handleDelete(product)}
                         >
-                          <DeleteOutline fontSize="small" />
+                          <DeleteOutlined fontSize="small" />
                         </IconButton>
                       </Tooltip>
                     </TableCell>

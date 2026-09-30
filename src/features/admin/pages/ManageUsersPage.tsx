@@ -26,7 +26,7 @@ import {
 import {
   AdminPanelSettingsOutlined,
   HistoryOutlined,
-  PersonOutline,
+  PersonOutlined,
   Search,
   ShieldOutlined,
 } from '@mui/icons-material';
@@ -91,10 +91,22 @@ const ManageUsersPage = () => {
         noindex
         nofollow
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         Users
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {users?.length ?? 0} registered accounts · grant or revoke admin access.
       </Typography>
 
@@ -105,12 +117,14 @@ const ManageUsersPage = () => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         sx={{ maxWidth: 420, mb: 2.5 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <Search fontSize="small" />
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search fontSize="small" />
+              </InputAdornment>
+            ),
+          },
         }}
       />
 
@@ -153,7 +167,13 @@ const ManageUsersPage = () => {
                 return (
                   <TableRow key={user.id} hover>
                     <TableCell>
-                      <Stack direction="row" alignItems="center" spacing={1.5}>
+                      <Stack
+                        direction="row"
+                        spacing={1.5}
+                        sx={{
+                          alignItems: 'center',
+                        }}
+                      >
                         <Avatar
                           src={user.photoURL}
                           sx={{
@@ -168,9 +188,13 @@ const ManageUsersPage = () => {
                         <Box sx={{ minWidth: 0 }}>
                           <Typography
                             component="div"
-                            fontWeight={700}
                             noWrap
-                            sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}
+                            sx={{
+                              fontWeight: 700,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 0.75,
+                            }}
                           >
                             {user.displayName || '—'}
                             {self && (
@@ -182,16 +206,28 @@ const ManageUsersPage = () => {
                               />
                             )}
                           </Typography>
-                          <Typography variant="caption" color="text.secondary" noWrap>
+                          <Typography
+                            variant="caption"
+                            noWrap
+                            sx={{
+                              color: 'text.secondary',
+                            }}
+                          >
                             {user.email}
                           </Typography>
                         </Box>
                       </Stack>
                     </TableCell>
                     <TableCell>
-                      <Stack direction="row" spacing={0.5} alignItems="center">
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        sx={{
+                          alignItems: 'center',
+                        }}
+                      >
                         <Chip
-                          icon={user.role === 'admin' ? <ShieldOutlined /> : <PersonOutline />}
+                          icon={user.role === 'admin' ? <ShieldOutlined /> : <PersonOutlined />}
                           label={user.role === 'admin' ? 'Admin' : 'Member'}
                           color={user.role === 'admin' ? 'secondary' : 'default'}
                           size="small"
@@ -211,7 +247,13 @@ const ManageUsersPage = () => {
                     <TableCell>{formatDate(user.createdAt, 'short')}</TableCell>
                     <TableCell>{formatDate(user.updatedAt, 'short')}</TableCell>
                     <TableCell align="right">
-                      <Stack direction="row" spacing={0.5} justifyContent="flex-end">
+                      <Stack
+                        direction="row"
+                        spacing={0.5}
+                        sx={{
+                          justifyContent: 'flex-end',
+                        }}
+                      >
                         <Tooltip title="View account activity">
                           <IconButton
                             size="small"
@@ -256,7 +298,13 @@ const ManageUsersPage = () => {
         {historyUser && (
           <>
             <DialogTitle sx={{ pb: 1 }}>
-              <Stack direction="row" spacing={1.5} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={1.5}
+                sx={{
+                  alignItems: 'center',
+                }}
+              >
                 <Avatar
                   src={historyUser.photoURL}
                   sx={{ width: 36, height: 36, bgcolor: 'primary.main', fontSize: '0.9rem' }}
@@ -264,8 +312,19 @@ const ManageUsersPage = () => {
                   {(historyUser.displayName || historyUser.email || 'U').charAt(0).toUpperCase()}
                 </Avatar>
                 <Box>
-                  <Typography fontWeight={700}>{historyUser.displayName || 'User'}</Typography>
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
+                    {historyUser.displayName || 'User'}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {historyUser.email} ·{' '}
                     <Chip
                       label={historyUser.role}
@@ -281,9 +340,21 @@ const ManageUsersPage = () => {
               {historyUser.history && historyUser.history.length > 0 ? (
                 <AuditTimeline events={historyUser.history} title="Account activity" />
               ) : (
-                <Stack alignItems="center" spacing={1} sx={{ py: 4, textAlign: 'center' }}>
+                <Stack
+                  spacing={1}
+                  sx={{
+                    alignItems: 'center',
+                    py: 4,
+                    textAlign: 'center',
+                  }}
+                >
                   <HistoryOutlined color="disabled" sx={{ fontSize: 40 }} />
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     No recorded activity yet for this account.
                   </Typography>
                 </Stack>

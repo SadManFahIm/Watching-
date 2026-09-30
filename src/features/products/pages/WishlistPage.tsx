@@ -20,10 +20,22 @@ const WishlistPage = () => {
         description="Your saved Classic Watch Pro timepieces — revisit and purchase them whenever you like."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         My Wishlist
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {productIds.length === 0
           ? 'Save timepieces you love and revisit them here.'
           : `${productIds.length} saved timepiece${productIds.length === 1 ? '' : 's'}`}

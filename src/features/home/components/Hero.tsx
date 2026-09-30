@@ -27,8 +27,19 @@ const Hero = () => {
         }}
       />
       <Container maxWidth="lg" sx={{ position: 'relative', py: { xs: 8, md: 12 } }}>
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={7}>
+        <Grid
+          container
+          spacing={4}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
+          <Grid
+            size={{
+              xs: 12,
+              md: 7,
+            }}
+          >
             <Typography
               variant="overline"
               sx={{ color: 'secondary.light', letterSpacing: '0.2em', fontWeight: 700 }}
@@ -38,8 +49,12 @@ const Hero = () => {
             <Typography
               variant="h2"
               component="h1"
-              fontWeight={800}
-              sx={{ mt: 1.5, letterSpacing: '-0.02em', fontSize: { xs: '2.4rem', md: '3.4rem' } }}
+              sx={{
+                fontWeight: 800,
+                mt: 1.5,
+                letterSpacing: '-0.02em',
+                fontSize: { xs: '2.4rem', md: '3.4rem' },
+              }}
             >
               Time, perfected.
             </Typography>
@@ -79,10 +94,11 @@ const Hero = () => {
             </Stack>
           </Grid>
           <Grid
-            item
-            xs={12}
-            md={5}
             sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}
+            size={{
+              xs: 12,
+              md: 5,
+            }}
           >
             <Box
               aria-hidden="true"

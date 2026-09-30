@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
+import type { Resolver } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
@@ -139,7 +140,7 @@ const CheckoutPage = () => {
     watch,
     formState: { errors, isSubmitting },
   } = useForm<CheckoutValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as unknown as Resolver<CheckoutValues, unknown, CheckoutValues>,
     defaultValues: {
       fullName: user?.displayName ?? '',
       phone: '',
@@ -285,7 +286,14 @@ const CheckoutPage = () => {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Seo title="Checkout" description="Complete your Classic Watch Pro order securely." noindex />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 3,
+        }}
+      >
         Checkout
       </Typography>
 
@@ -298,15 +306,32 @@ const CheckoutPage = () => {
       </Stepper>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={7}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 7,
+          }}
+        >
           <Paper variant="outlined" sx={{ p: { xs: 2, md: 3.5 } }}>
             {activeStep === 0 && (
               <>
-                <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2.5 }}>
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2.5,
+                  }}
+                >
                   Shipping details
                 </Typography>
                 <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 6,
+                    }}
+                  >
                     <TextField
                       label="Full name"
                       fullWidth
@@ -315,7 +340,12 @@ const CheckoutPage = () => {
                       helperText={errors.fullName?.message}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={6}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 6,
+                    }}
+                  >
                     <TextField
                       label="Phone"
                       fullWidth
@@ -324,7 +354,7 @@ const CheckoutPage = () => {
                       helperText={errors.phone?.message}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TextField
                       label="Address line 1"
                       fullWidth
@@ -333,14 +363,19 @@ const CheckoutPage = () => {
                       helperText={errors.addressLine1?.message}
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid size={12}>
                     <TextField
                       label="Address line 2 (optional)"
                       fullWidth
                       {...register('addressLine2')}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 4,
+                    }}
+                  >
                     <TextField
                       label="City"
                       fullWidth
@@ -349,7 +384,12 @@ const CheckoutPage = () => {
                       helperText={errors.city?.message}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 4,
+                    }}
+                  >
                     <TextField
                       label="Postal code"
                       fullWidth
@@ -358,7 +398,12 @@ const CheckoutPage = () => {
                       helperText={errors.postalCode?.message}
                     />
                   </Grid>
-                  <Grid item xs={12} sm={4}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 4,
+                    }}
+                  >
                     <Controller
                       name="country"
                       control={control}
@@ -390,7 +435,14 @@ const CheckoutPage = () => {
 
             {activeStep === 1 && (
               <>
-                <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2,
+                  }}
+                >
                   Payment method
                 </Typography>
                 <Controller
@@ -411,7 +463,7 @@ const CheckoutPage = () => {
 
                 {isCard ? (
                   <Grid container spacing={2} sx={{ mt: 1 }}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <Controller
                         name="cardNumber"
                         control={control}
@@ -431,7 +483,12 @@ const CheckoutPage = () => {
                         )}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid
+                      size={{
+                        xs: 12,
+                        sm: 6,
+                      }}
+                    >
                       <TextField
                         label="Expiry (MM/YY)"
                         fullWidth
@@ -441,7 +498,12 @@ const CheckoutPage = () => {
                         helperText={errors.cardExpiry?.message}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid
+                      size={{
+                        xs: 12,
+                        sm: 6,
+                      }}
+                    >
                       <TextField
                         label="CVC"
                         fullWidth
@@ -453,7 +515,7 @@ const CheckoutPage = () => {
                         helperText={errors.cardCvc?.message}
                       />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                       <Alert severity="info">
                         Demo checkout — no real payment is processed. Any valid-looking card details
                         will work.
@@ -472,17 +534,39 @@ const CheckoutPage = () => {
 
             {activeStep === 2 && (
               <>
-                <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+                <Typography
+                  variant="h6"
+                  component="h2"
+                  sx={{
+                    fontWeight: 700,
+                    mb: 2,
+                  }}
+                >
                   Review your order
                 </Typography>
                 <Stack spacing={0.5} sx={{ mb: 3 }}>
-                  <Typography variant="body2" fontWeight={600}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 600,
+                    }}
+                  >
                     Ship to
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {watched.fullName} · {watched.phone}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {[
                       watched.addressLine1,
                       watched.addressLine2,
@@ -502,11 +586,22 @@ const CheckoutPage = () => {
                   >
                     <Typography variant="body2">
                       {item.product.name}{' '}
-                      <Typography component="span" variant="caption" color="text.secondary">
+                      <Typography
+                        component="span"
+                        variant="caption"
+                        sx={{
+                          color: 'text.secondary',
+                        }}
+                      >
                         × {item.quantity}
                       </Typography>
                     </Typography>
-                    <Typography variant="body2" fontWeight={600}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        fontWeight: 600,
+                      }}
+                    >
                       {formatCurrency(item.product.price * item.quantity)}
                     </Typography>
                   </Box>
@@ -514,8 +609,19 @@ const CheckoutPage = () => {
 
                 <Divider sx={{ my: 2 }} />
                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography color="text.secondary">Payment</Typography>
-                  <Typography fontWeight={600} textTransform="capitalize">
+                  <Typography
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
+                    Payment
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      textTransform: 'capitalize',
+                    }}
+                  >
                     {watched.paymentMethod === 'card'
                       ? `Card •••• ${(watched.cardNumber ?? '').replace(/\D/g, '').slice(-4) || '4242'}`
                       : watched.paymentMethod === 'cod'
@@ -526,7 +632,13 @@ const CheckoutPage = () => {
               </>
             )}
 
-            <Stack direction="row" justifyContent="space-between" sx={{ mt: 4 }}>
+            <Stack
+              direction="row"
+              sx={{
+                justifyContent: 'space-between',
+                mt: 4,
+              }}
+            >
               <Button disabled={activeStep === 0} onClick={handleBack}>
                 Back
               </Button>
@@ -551,48 +663,125 @@ const CheckoutPage = () => {
         </Grid>
 
         {/* Summary */}
-        <Grid item xs={12} md={5}>
+        <Grid
+          size={{
+            xs: 12,
+            md: 5,
+          }}
+        >
           <Paper variant="outlined" sx={{ p: 3, position: 'sticky', top: 96 }}>
-            <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+                mb: 2,
+              }}
+            >
               Summary
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography color="text.secondary">Subtotal</Typography>
-              <Typography fontWeight={600}>{formatCurrency(subtotal)}</Typography>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Subtotal
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
+                {formatCurrency(subtotal)}
+              </Typography>
             </Box>
             {discount > 0 && appliedPromo && (
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                <Typography color="success.main" variant="body2" fontWeight={600}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: 'success.main',
+                    fontWeight: 600,
+                  }}
+                >
                   Promo {appliedPromo.code}
                 </Typography>
-                <Typography color="success.main" fontWeight={600}>
+                <Typography
+                  sx={{
+                    color: 'success.main',
+                    fontWeight: 600,
+                  }}
+                >
                   −{formatCurrency(discount)}
                 </Typography>
               </Box>
             )}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography color="text.secondary">Shipping</Typography>
-              <Typography fontWeight={600}>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Shipping
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
                 {shipping === 0 ? 'Free' : formatCurrency(shipping)}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-              <Typography color="text.secondary">Estimated tax</Typography>
-              <Typography fontWeight={600}>{formatCurrency(tax)}</Typography>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Estimated tax
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
+                {formatCurrency(tax)}
+              </Typography>
             </Box>
             <Divider sx={{ mb: 2 }} />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               {/* Summary totals are data labels, not document headings. */}
-              <Typography component="div" variant="h6" fontWeight={700}>
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
                 Total
               </Typography>
-              <Typography component="div" variant="h6" fontWeight={800} color="primary.main">
+              <Typography
+                component="div"
+                variant="h6"
+                sx={{
+                  fontWeight: 800,
+                  color: 'primary.main',
+                }}
+              >
                 {formatCurrency(grandTotal)}
               </Typography>
             </Box>
             {/* Promo code */}
             {appliedPromo ? (
-              <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 2 }}>
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  alignItems: 'center',
+                  mt: 2,
+                }}
+              >
                 <Chip
                   label={promoCode}
                   color="success"
@@ -600,7 +789,12 @@ const CheckoutPage = () => {
                   onDelete={removePromoCode}
                   deleteIcon={<Close fontSize="small" />}
                 />
-                <Typography variant="caption" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
                   {formatCurrency(discount)} off applied
                 </Typography>
               </Stack>
@@ -618,7 +812,7 @@ const CheckoutPage = () => {
                       void handleApplyPromo();
                     }
                   }}
-                  inputProps={{ maxLength: 20 }}
+                  slotProps={{ htmlInput: { maxLength: 20 } }}
                 />
                 <Button
                   variant="outlined"
@@ -629,7 +823,14 @@ const CheckoutPage = () => {
                 </Button>
               </Box>
             )}
-            <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 2 }}>
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+                display: 'block',
+                mt: 2,
+              }}
+            >
               Free insured shipping on orders over {formatCurrency(500)}.
             </Typography>
           </Paper>

@@ -51,19 +51,37 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={2} sx={{ py: 3 }}>
           {TRUST_ITEMS.map((item) => (
-            <Grid item xs={12} sm={4} key={item.label}>
+            <Grid
+              key={item.label}
+              size={{
+                xs: 12,
+                sm: 4,
+              }}
+            >
               <Stack
                 direction="row"
                 spacing={1.5}
-                alignItems="center"
-                justifyContent={{ xs: 'flex-start', sm: 'center' }}
+                sx={{
+                  alignItems: 'center',
+                  justifyContent: { xs: 'flex-start', sm: 'center' },
+                }}
               >
                 <item.icon sx={{ color: 'primary.main' }} />
                 <Box>
-                  <Typography variant="subtitle2" fontWeight={700}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     {item.label}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {item.caption}
                   </Typography>
                 </Box>
@@ -77,22 +95,48 @@ const Footer = () => {
       {/* Link columns */}
       <Container maxWidth="lg">
         <Grid container spacing={4} sx={{ py: 4 }}>
-          <Grid item xs={12} md={4}>
+          <Grid
+            size={{
+              xs: 12,
+              md: 4,
+            }}
+          >
             <Typography
               variant="h6"
               component="div"
-              fontWeight={800}
-              sx={{ color: 'primary.main', mb: 1 }}
+              sx={{
+                fontWeight: 800,
+                color: 'primary.main',
+                mb: 1,
+              }}
             >
               Classic Watch Pro
             </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 320 }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+                maxWidth: 320,
+              }}
+            >
               A curated collection of luxury timepieces. Every watch is certified authentic and
               delivered with full warranty coverage.
             </Typography>
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+          <Grid
+            size={{
+              xs: 6,
+              sm: 4,
+              md: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 700,
+                mb: 1,
+              }}
+            >
               Shop
             </Typography>
             <Stack spacing={0.75}>
@@ -102,16 +146,30 @@ const Footer = () => {
                   variant="body2"
                   component={RouterLink}
                   to={link.to}
-                  color="text.secondary"
-                  sx={{ '&:hover': { color: 'primary.main' } }}
+                  sx={{
+                    color: 'text.secondary',
+                    '&:hover': { color: 'primary.main' },
+                  }}
                 >
                   {link.label}
                 </Typography>
               ))}
             </Stack>
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+          <Grid
+            size={{
+              xs: 6,
+              sm: 4,
+              md: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 700,
+                mb: 1,
+              }}
+            >
               Account
             </Typography>
             <Stack spacing={0.75}>
@@ -121,16 +179,30 @@ const Footer = () => {
                   variant="body2"
                   component={RouterLink}
                   to={link.to}
-                  color="text.secondary"
-                  sx={{ '&:hover': { color: 'primary.main' } }}
+                  sx={{
+                    color: 'text.secondary',
+                    '&:hover': { color: 'primary.main' },
+                  }}
                 >
                   {link.label}
                 </Typography>
               ))}
             </Stack>
           </Grid>
-          <Grid item xs={6} sm={4} md={2}>
-            <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+          <Grid
+            size={{
+              xs: 6,
+              sm: 4,
+              md: 2,
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 700,
+                mb: 1,
+              }}
+            >
               Support
             </Typography>
             <Stack spacing={0.75}>
@@ -140,8 +212,10 @@ const Footer = () => {
                   variant="body2"
                   component={RouterLink}
                   to={link.to}
-                  color="text.secondary"
-                  sx={{ '&:hover': { color: 'primary.main' } }}
+                  sx={{
+                    color: 'text.secondary',
+                    '&:hover': { color: 'primary.main' },
+                  }}
                 >
                   {link.label}
                 </Typography>
@@ -153,10 +227,20 @@ const Footer = () => {
         <Box
           sx={{ py: 2, display: 'flex', flexWrap: 'wrap', gap: 1, justifyContent: 'space-between' }}
         >
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            variant="caption"
+            sx={{
+              color: 'text.secondary',
+            }}
+          >
             © {year} Classic Watch Pro. All rights reserved.
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            variant="caption"
+            sx={{
+              color: 'text.secondary',
+            }}
+          >
             Secure checkout · Privacy first
           </Typography>
         </Box>

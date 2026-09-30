@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 import {
   BadgeOutlined,
-  DeleteOutline,
+  DeleteOutlined,
   KeyOutlined,
   Logout,
   MarkEmailReadOutlined,
@@ -89,7 +89,13 @@ const ProfilePage = () => {
   if (!user) {
     return (
       <Box sx={{ py: 6, textAlign: 'center' }}>
-        <Typography variant="h5" fontWeight={700} sx={{ mb: 2 }}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 700,
+            mb: 2,
+          }}
+        >
           Not signed in
         </Typography>
         <Button variant="contained" onClick={() => navigate('/login')}>
@@ -106,7 +112,14 @@ const ProfilePage = () => {
         description="Manage your Classic Watch Pro account, security and preferences."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 3 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 3,
+        }}
+      >
         Profile
       </Typography>
 
@@ -117,7 +130,12 @@ const ProfilePage = () => {
         </Alert>
       )}
 
-      <Stack spacing={3} maxWidth={640}>
+      <Stack
+        spacing={3}
+        sx={{
+          maxWidth: 640,
+        }}
+      >
         {/* Identity card */}
         <Card variant="outlined">
           <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2.5, flexWrap: 'wrap' }}>
@@ -128,9 +146,21 @@ const ProfilePage = () => {
               {(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
             </Avatar>
             <Box sx={{ flexGrow: 1, minWidth: 200 }}>
-              <Stack direction="row" spacing={1} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{
+                  alignItems: 'center',
+                }}
+              >
                 {/* Profile identity is data, not a document heading. */}
-                <Typography variant="h6" component="div" fontWeight={700}>
+                <Typography
+                  variant="h6"
+                  component="div"
+                  sx={{
+                    fontWeight: 700,
+                  }}
+                >
                   {user.displayName || 'User'}
                 </Typography>
                 <Chip
@@ -139,10 +169,20 @@ const ProfilePage = () => {
                   size="small"
                 />
               </Stack>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 {user.email}
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 Member since {formatDate(user.createdAt, 'long')}
               </Typography>
             </Box>
@@ -159,38 +199,98 @@ const ProfilePage = () => {
 
         {/* Details */}
         <Paper variant="outlined" sx={{ p: 3 }}>
-          <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              mb: 2,
+            }}
+          >
             Account details
           </Typography>
           <Stack spacing={1.5}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography color="text.secondary">Account ID</Typography>
-              <Typography fontWeight={600}>{user.id}</Typography>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Account ID
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
+                {user.id}
+              </Typography>
             </Box>
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography color="text.secondary">Role</Typography>
-              <Typography fontWeight={600} textTransform="capitalize">
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Role
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                  textTransform: 'capitalize',
+                }}
+              >
                 {user.role}
               </Typography>
             </Box>
             <Divider />
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography color="text.secondary">Photo</Typography>
-              <Typography fontWeight={600}>{user.photoURL ? 'Connected' : 'Not set'}</Typography>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Photo
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
+                {user.photoURL ? 'Connected' : 'Not set'}
+              </Typography>
             </Box>
           </Stack>
         </Paper>
 
         {/* Security */}
         <Paper variant="outlined" sx={{ p: 3 }}>
-          <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{
+              alignItems: 'center',
+              mb: 1.5,
+            }}
+          >
             <ShieldOutlined color="primary" />
-            <Typography variant="h6" component="h2" fontWeight={700}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               Security
             </Typography>
           </Stack>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+            }}
+          >
             Authentication is managed by your identity provider. Password resets and verification
             links are sent to your registered email address.
           </Typography>
@@ -214,7 +314,12 @@ const ProfilePage = () => {
             >
               <Stack spacing={1}>
                 <Box>
-                  <Typography fontWeight={700} variant="body2">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     Email not verified yet
                   </Typography>
                   <Typography variant="body2">
@@ -250,9 +355,11 @@ const ProfilePage = () => {
                   {verifyNotice && (
                     <Typography
                       variant="caption"
-                      color="text.secondary"
-                      display="block"
-                      sx={{ mt: 0.5 }}
+                      sx={{
+                        color: 'text.secondary',
+                        display: 'block',
+                        mt: 0.5,
+                      }}
                     >
                       {verifyNotice}
                     </Typography>
@@ -261,7 +368,13 @@ const ProfilePage = () => {
               </Stack>
             </Alert>
           ) : (
-            <Stack direction="row" spacing={1.5} alignItems="center">
+            <Stack
+              direction="row"
+              spacing={1.5}
+              sx={{
+                alignItems: 'center',
+              }}
+            >
               <MarkEmailReadOutlined fontSize="small" color="success" />
               <Typography variant="body2">
                 Email verified
@@ -281,9 +394,20 @@ const ProfilePage = () => {
 
           {/* Two-factor authentication */}
           <Stack spacing={1.5}>
-            <Stack direction="row" spacing={1.5} alignItems="center">
+            <Stack
+              direction="row"
+              spacing={1.5}
+              sx={{
+                alignItems: 'center',
+              }}
+            >
               <KeyOutlined fontSize="small" color="primary" />
-              <Typography fontWeight={700} variant="body2">
+              <Typography
+                variant="body2"
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
                 Two-factor authentication
               </Typography>
               <Chip
@@ -294,7 +418,12 @@ const ProfilePage = () => {
                 sx={{ height: 20, fontSize: '0.68rem', fontWeight: 700 }}
               />
             </Stack>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {user.mfaEnabled === true
                 ? `Protected with an authenticator app${user.mfaEnrolledAt ? ` since ${formatDate(user.mfaEnrolledAt, 'short')}` : ''}.`
                 : 'Add a second factor so your account stays safe even if your password leaks.'}
@@ -319,7 +448,13 @@ const ProfilePage = () => {
               </Button>
             )}
             {mfaNotice && (
-              <Typography variant="caption" color="text.secondary" display="block">
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                  display: 'block',
+                }}
+              >
                 {mfaNotice}
               </Typography>
             )}
@@ -331,9 +466,20 @@ const ProfilePage = () => {
 
               {/* Passkeys (WebAuthn when the platform supports it) */}
               <Stack spacing={1.5}>
-                <Stack direction="row" spacing={1} alignItems="center">
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                >
                   <SmartphoneOutlined fontSize="small" color="primary" />
-                  <Typography fontWeight={700} variant="body2">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     Passkeys
                   </Typography>
                   <Chip
@@ -350,7 +496,12 @@ const ProfilePage = () => {
                     sx={{ height: 20, fontSize: '0.68rem' }}
                   />
                 </Stack>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: 'text.secondary',
+                  }}
+                >
                   {webauthnSupported()
                     ? 'Secured by your device biometrics — sign in with a passkey instead of a code.'
                     : 'Your browser does not expose WebAuthn here (passkeys need HTTPS or localhost) — using the demo stand-in.'}
@@ -361,9 +512,9 @@ const ProfilePage = () => {
                       <Stack
                         key={record.id}
                         direction="row"
-                        alignItems="center"
-                        justifyContent="space-between"
                         sx={{
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
                           px: 1.5,
                           py: 0.75,
                           borderRadius: 1.5,
@@ -372,10 +523,20 @@ const ProfilePage = () => {
                         }}
                       >
                         <Box>
-                          <Typography variant="body2" fontWeight={600}>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              fontWeight: 600,
+                            }}
+                          >
                             {record.name}
                           </Typography>
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              color: 'text.secondary',
+                            }}
+                          >
                             Registered {formatDate(record.createdAt, 'short')}
                             {record.isWebAuthn ? ' · WebAuthn' : ' · demo stand-in'}
                           </Typography>
@@ -390,14 +551,20 @@ const ProfilePage = () => {
                               )
                             }
                           >
-                            <DeleteOutline fontSize="small" />
+                            <DeleteOutlined fontSize="small" />
                           </IconButton>
                         </Tooltip>
                       </Stack>
                     ))}
                   </Stack>
                 )}
-                <Stack direction="row" spacing={1} alignItems="center">
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                >
                   <TextField
                     size="small"
                     placeholder="Device name (e.g. MacBook Pro)"
@@ -415,7 +582,13 @@ const ProfilePage = () => {
                   </Button>
                 </Stack>
                 {passkeyNotice && (
-                  <Typography variant="caption" color="text.secondary" display="block">
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: 'text.secondary',
+                      display: 'block',
+                    }}
+                  >
                     {passkeyNotice}
                   </Typography>
                 )}
@@ -431,7 +604,14 @@ const ProfilePage = () => {
         />
 
         {/* Demo info */}
-        <Stack direction="row" spacing={1} alignItems="center" color="text.secondary">
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: 'center',
+            color: 'text.secondary',
+          }}
+        >
           <BadgeOutlined fontSize="small" />
           <Typography variant="caption">
             Last updated {formatDate(user.updatedAt, 'short')}

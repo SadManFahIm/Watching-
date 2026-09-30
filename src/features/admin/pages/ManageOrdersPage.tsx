@@ -98,10 +98,22 @@ const ManageOrdersPage = () => {
         noindex
         nofollow
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         Orders
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         {allOrders.length} order{allOrders.length === 1 ? '' : 's'} · update fulfilment status as
         you ship.
       </Typography>
@@ -180,8 +192,19 @@ const ManageOrdersPage = () => {
                   }}
                 >
                   <Box sx={{ minWidth: 130 }}>
-                    <Typography fontWeight={700}>#{order.id.toUpperCase()}</Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography
+                      sx={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      #{order.id.toUpperCase()}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color: 'text.secondary',
+                      }}
+                    >
                       {formatDate(order.createdAt, 'short')}
                     </Typography>
                   </Box>
@@ -189,7 +212,14 @@ const ManageOrdersPage = () => {
                     <Typography variant="body2" noWrap>
                       {order.shippingAddress.fullName}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary" noWrap display="block">
+                    <Typography
+                      variant="caption"
+                      noWrap
+                      sx={{
+                        color: 'text.secondary',
+                        display: 'block',
+                      }}
+                    >
                       {itemCount} item{itemCount === 1 ? '' : 's'} ·{' '}
                       {order.items.map((item) => item.product.name).join(', ')}
                     </Typography>
@@ -201,22 +231,44 @@ const ManageOrdersPage = () => {
                     size="small"
                     variant="outlined"
                   />
-                  <Typography fontWeight={800} sx={{ minWidth: 100, textAlign: 'right' }}>
+                  <Typography
+                    sx={{
+                      fontWeight: 800,
+                      minWidth: 100,
+                      textAlign: 'right',
+                    }}
+                  >
                     {formatCurrency(order.total)}
                   </Typography>
                 </AccordionSummary>
 
                 <AccordionDetails sx={{ borderTop: '1px solid', borderColor: 'divider', pt: 2 }}>
                   <Grid container spacing={3}>
-                    <Grid item xs={12} md={5}>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+                    <Grid
+                      size={{
+                        xs: 12,
+                        md: 5,
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 700,
+                          mb: 1,
+                        }}
+                      >
                         Customer & shipping
                       </Typography>
                       <Stack spacing={0.25}>
                         <Typography variant="body2">
                           {order.shippingAddress.fullName} · {order.shippingAddress.phone}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: 'text.secondary',
+                          }}
+                        >
                           {[
                             order.shippingAddress.addressLine1,
                             order.shippingAddress.addressLine2,
@@ -228,15 +280,31 @@ const ManageOrdersPage = () => {
                             .filter(Boolean)
                             .join(', ')}
                         </Typography>
-                        <Typography variant="caption" color="text.secondary">
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'text.secondary',
+                          }}
+                        >
                           Payment: {order.paymentMethod.toUpperCase()} · {order.paymentStatus}
                           {order.trackingNumber ? ` · Tracking: ${order.trackingNumber}` : ''}
                         </Typography>
                       </Stack>
                     </Grid>
 
-                    <Grid item xs={12} md={4}>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+                    <Grid
+                      size={{
+                        xs: 12,
+                        md: 4,
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 700,
+                          mb: 1,
+                        }}
+                      >
                         Items
                       </Typography>
                       <Stack spacing={0.5}>
@@ -244,38 +312,87 @@ const ManageOrdersPage = () => {
                           <Stack
                             key={item.productId}
                             direction="row"
-                            justifyContent="space-between"
-                            gap={1}
+                            sx={{
+                              justifyContent: 'space-between',
+                              gap: 1,
+                            }}
                           >
                             <Typography variant="body2" noWrap>
                               {item.product.name} × {item.quantity}
                             </Typography>
-                            <Typography variant="body2" fontWeight={600}>
+                            <Typography
+                              variant="body2"
+                              sx={{
+                                fontWeight: 600,
+                              }}
+                            >
                               {formatCurrency(item.product.price * item.quantity)}
                             </Typography>
                           </Stack>
                         ))}
                       </Stack>
-                      <Stack direction="row" justifyContent="space-between" sx={{ mt: 1 }}>
-                        <Typography variant="caption" color="text.secondary">
+                      <Stack
+                        direction="row"
+                        sx={{
+                          justifyContent: 'space-between',
+                          mt: 1,
+                        }}
+                      >
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'text.secondary',
+                          }}
+                        >
                           Subtotal
                         </Typography>
-                        <Typography variant="caption" fontWeight={600}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                          }}
+                        >
                           {formatCurrency(order.subtotal)}
                         </Typography>
                       </Stack>
-                      <Stack direction="row" justifyContent="space-between">
-                        <Typography variant="caption" color="text.secondary">
+                      <Stack
+                        direction="row"
+                        sx={{
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: 'text.secondary',
+                          }}
+                        >
                           Shipping + tax
                         </Typography>
-                        <Typography variant="caption" fontWeight={600}>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            fontWeight: 600,
+                          }}
+                        >
                           {formatCurrency(order.shipping + order.tax)}
                         </Typography>
                       </Stack>
                     </Grid>
 
-                    <Grid item xs={12} md={3}>
-                      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+                    <Grid
+                      size={{
+                        xs: 12,
+                        md: 3,
+                      }}
+                    >
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          fontWeight: 700,
+                          mb: 1,
+                        }}
+                      >
                         Fulfilment
                       </Typography>
                       {canAdvance(order.orderStatus) ? (

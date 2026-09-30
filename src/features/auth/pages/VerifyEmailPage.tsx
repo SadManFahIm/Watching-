@@ -85,13 +85,31 @@ const VerifyEmailPage = () => {
         description="Verify your Classic Watch Pro email to activate your account."
         noindex
       />
-      <Typography variant="overline" color="primary.main" fontWeight={800}>
+      <Typography
+        variant="overline"
+        sx={{
+          color: 'primary.main',
+          fontWeight: 800,
+        }}
+      >
         One last step
       </Typography>
-      <Typography variant="h4" component="h1" fontWeight={800}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 800,
+        }}
+      >
         Verify your email
       </Typography>
-      <Typography color="text.secondary" sx={{ mt: 0.5, mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mt: 0.5,
+          mb: 3,
+        }}
+      >
         We sent a confirmation link to your inbox — click it to activate your account.
       </Typography>
       <Alert severity="info" sx={{ mb: 3 }}>
@@ -106,11 +124,29 @@ const VerifyEmailPage = () => {
       )}
 
       <Paper variant="outlined" sx={{ p: 3, mb: 3 }}>
-        <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
+        <Stack
+          direction="row"
+          spacing={1.5}
+          sx={{
+            alignItems: 'center',
+            mb: 1.5,
+          }}
+        >
           <MarkEmailReadOutlined color="primary" />
-          <Typography fontWeight={700}>What happens next?</Typography>
+          <Typography
+            sx={{
+              fontWeight: 700,
+            }}
+          >
+            What happens next?
+          </Typography>
         </Stack>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'text.secondary',
+          }}
+        >
           Click the link in the email, then press “I've verified — continue” below. Until then your
           account stays read-only and checkout, orders and the dashboard remain locked.
         </Typography>
@@ -145,15 +181,22 @@ const VerifyEmailPage = () => {
       </Stack>
 
       <Box sx={{ mt: 3, textAlign: 'center' }}>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          sx={{
+            color: 'text.secondary',
+          }}
+        >
           <VerifiedUserOutlined sx={{ fontSize: 16, verticalAlign: 'text-bottom', mr: 0.5 }} />
           Already verified?{' '}
           <Typography
             component={RouterLink}
             to="/login"
-            color="primary.main"
-            fontWeight={700}
-            sx={{ textDecoration: 'none' }}
+            sx={{
+              color: 'primary.main',
+              fontWeight: 700,
+              textDecoration: 'none',
+            }}
           >
             Sign in
           </Typography>{' '}

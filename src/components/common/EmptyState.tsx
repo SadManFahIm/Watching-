@@ -51,10 +51,22 @@ const EmptyState = ({
       )}
       {/* Panel/region title — h2 keeps every embedding context (directly under
           a page h1, or nested under a section h2) in a valid outline. */}
-      <Typography variant="h6" component="h2" fontWeight={600}>
+      <Typography
+        variant="h6"
+        component="h2"
+        sx={{
+          fontWeight: 600,
+        }}
+      >
         {title}
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 420 }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'text.secondary',
+          maxWidth: 420,
+        }}
+      >
         {message}
       </Typography>
       {action && <Box sx={{ mt: 1 }}>{action}</Box>}

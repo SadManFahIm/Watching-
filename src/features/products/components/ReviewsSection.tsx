@@ -22,7 +22,7 @@ import {
 import {
   CheckCircle,
   Close,
-  DeleteOutline,
+  DeleteOutlined,
   ThumbUpAlt,
   ThumbUpAltOutlined,
 } from '@mui/icons-material';
@@ -54,7 +54,7 @@ const AdminDeleteButton = ({ review }: { review: Review }) => {
     <Button
       size="small"
       color="error"
-      startIcon={<DeleteOutline fontSize="small" />}
+      startIcon={<DeleteOutlined fontSize="small" />}
       onClick={() => deleteReview.mutate(review)}
       disabled={deleteReview.isPending}
       sx={{ textTransform: 'none' }}
@@ -76,7 +76,13 @@ const ReviewCard = ({ review, isAdmin }: { review: Review; isAdmin: boolean }) =
 
   return (
     <Box component="article" aria-label={`Review by ${review.userName}`} sx={{ py: 2.5 }}>
-      <Stack direction="row" spacing={1.5} alignItems="flex-start">
+      <Stack
+        direction="row"
+        spacing={1.5}
+        sx={{
+          alignItems: 'flex-start',
+        }}
+      >
         <Avatar
           sx={{ width: 40, height: 40, bgcolor: 'primary.main', fontSize: '1rem' }}
           aria-hidden="true"
@@ -84,8 +90,21 @@ const ReviewCard = ({ review, isAdmin }: { review: Review; isAdmin: boolean }) =
           {(review.userName || 'R').charAt(0).toUpperCase()}
         </Avatar>
         <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-          <Stack direction="row" spacing={1} alignItems="center" flexWrap="wrap" useFlexGap>
-            <Typography variant="subtitle2" fontWeight={700}>
+          <Stack
+            direction="row"
+            spacing={1}
+            useFlexGap
+            sx={{
+              alignItems: 'center',
+              flexWrap: 'wrap',
+            }}
+          >
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               {review.userName}
             </Typography>
             {review.verified && (
@@ -98,7 +117,12 @@ const ReviewCard = ({ review, isAdmin }: { review: Review; isAdmin: boolean }) =
                 sx={{ '& .MuiChip-label': { fontSize: '0.7rem' } }}
               />
             )}
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               {formatDate(review.createdAt, 'long')}
             </Typography>
           </Stack>
@@ -106,10 +130,12 @@ const ReviewCard = ({ review, isAdmin }: { review: Review; isAdmin: boolean }) =
           <Stack
             direction="row"
             spacing={1}
-            alignItems="center"
-            sx={{ mt: 0.75 }}
-            flexWrap="wrap"
             useFlexGap
+            sx={{
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              mt: 0.75,
+            }}
           >
             <Rating
               value={review.rating}
@@ -120,18 +146,33 @@ const ReviewCard = ({ review, isAdmin }: { review: Review; isAdmin: boolean }) =
             <Typography
               component="h3"
               variant="subtitle2"
-              fontWeight={700}
-              sx={{ fontSize: '0.95rem' }}
+              sx={{
+                fontWeight: 700,
+                fontSize: '0.95rem',
+              }}
             >
               {review.title}
             </Typography>
           </Stack>
 
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 0.75 }}>
+          <Typography
+            variant="body2"
+            sx={{
+              color: 'text.secondary',
+              mt: 0.75,
+            }}
+          >
             {review.comment}
           </Typography>
 
-          <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 1.25 }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              alignItems: 'center',
+              mt: 1.25,
+            }}
+          >
             <Tooltip title={helped ? 'Thanks for your feedback' : 'Mark this review helpful'}>
               <Button
                 size="small"
@@ -222,7 +263,13 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
           gap: 2,
         }}
       >
-        <Typography variant="h5" component="h2" fontWeight={700}>
+        <Typography
+          variant="h5"
+          component="h2"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Customer reviews
         </Typography>
         <Button variant="contained" size="small" onClick={openDialog}>
@@ -244,16 +291,30 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} sx={{ mt: 3 }}>
           {/* Summary */}
           <Box sx={{ width: { xs: '100%', md: 260 }, flexShrink: 0 }}>
-            <Stack direction="row" alignItems="baseline" spacing={1}>
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{
+                alignItems: 'baseline',
+              }}
+            >
               <Typography
                 component="span"
                 variant="h2"
-                fontWeight={800}
-                sx={{ fontSize: '3rem', lineHeight: 1 }}
+                sx={{
+                  fontWeight: 800,
+                  fontSize: '3rem',
+                  lineHeight: 1,
+                }}
               >
                 {average > 0 ? average.toFixed(1) : '—'}
               </Typography>
-              <Typography color="text.secondary" variant="body2">
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 out of 5
               </Typography>
             </Stack>
@@ -263,7 +324,13 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
               precision={0.1}
               aria-label={`Average rating ${average} out of 5`}
             />
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+                mt: 0.5,
+              }}
+            >
               {product.reviewCount} review{product.reviewCount === 1 ? '' : 's'} in total
             </Typography>
 
@@ -273,9 +340,11 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
                   key={band.value}
                   direction="row"
                   spacing={1}
-                  alignItems="center"
                   role="listitem"
                   aria-label={`${band.value} star reviews: ${band.count}`}
+                  sx={{
+                    alignItems: 'center',
+                  }}
                 >
                   <Typography variant="caption" sx={{ width: 34 }} aria-hidden="true">
                     {band.value} ★
@@ -299,9 +368,12 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
                   </Box>
                   <Typography
                     variant="caption"
-                    color="text.secondary"
-                    sx={{ width: 22, textAlign: 'right' }}
                     aria-hidden="true"
+                    sx={{
+                      color: 'text.secondary',
+                      width: 22,
+                      textAlign: 'right',
+                    }}
                   >
                     {band.count}
                   </Typography>
@@ -331,7 +403,14 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
             choose with confidence.
           </DialogContentText>
 
-          <Typography component="legend" variant="subtitle2" fontWeight={700} sx={{ mb: 0.5 }}>
+          <Typography
+            component="legend"
+            variant="subtitle2"
+            sx={{
+              fontWeight: 700,
+              mb: 0.5,
+            }}
+          >
             Your rating
           </Typography>
           <Rating
@@ -348,7 +427,7 @@ const ReviewsSection = ({ product }: ReviewsSectionProps) => {
             placeholder="A short summary, e.g. Flawless craftsmanship"
             value={draftTitle}
             onChange={(event) => setDraftTitle(event.target.value)}
-            inputProps={{ maxLength: 80 }}
+            slotProps={{ htmlInput: { maxLength: 80 } }}
             sx={{ mt: 1 }}
           />
           <TextField

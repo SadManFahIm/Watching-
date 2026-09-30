@@ -70,8 +70,21 @@ const ProductFilters = ({ value, onChange, onClear }: ProductFiltersProps) => {
 
   return (
     <Box component="form" onSubmit={(event) => event.preventDefault()}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1 }}>
-        <Typography variant="h6" component="h2" fontWeight={700}>
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          mb: 1,
+        }}
+      >
+        <Typography
+          variant="h6"
+          component="h2"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           Filters
         </Typography>
         {activeFilterCount > 0 && (
@@ -84,10 +97,23 @@ const ProductFilters = ({ value, onChange, onClear }: ProductFiltersProps) => {
       <Divider sx={{ mb: 2 }} />
 
       {/* Categories */}
-      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+      <Typography
+        variant="subtitle2"
+        sx={{
+          fontWeight: 700,
+          mb: 1,
+        }}
+      >
         Category
       </Typography>
-      <Stack direction="row" flexWrap="wrap" gap={0.75} sx={{ mb: 2.5 }}>
+      <Stack
+        direction="row"
+        sx={{
+          flexWrap: 'wrap',
+          gap: 0.75,
+          mb: 2.5,
+        }}
+      >
         {PRODUCT_CATEGORIES.map((category) => {
           const selected = selectedCategories.includes(category.value);
           return (
@@ -104,10 +130,22 @@ const ProductFilters = ({ value, onChange, onClear }: ProductFiltersProps) => {
       </Stack>
 
       {/* Price */}
-      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+      <Typography
+        variant="subtitle2"
+        sx={{
+          fontWeight: 700,
+          mb: 1,
+        }}
+      >
         Price range
       </Typography>
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'text.secondary',
+          mb: 0.5,
+        }}
+      >
         {formatCurrency(localPrice[0])} — {formatCurrency(localPrice[1])}
       </Typography>
       <Slider
@@ -127,10 +165,23 @@ const ProductFilters = ({ value, onChange, onClear }: ProductFiltersProps) => {
       />
 
       {/* Rating */}
-      <Typography variant="subtitle2" fontWeight={700} sx={{ mb: 1 }}>
+      <Typography
+        variant="subtitle2"
+        sx={{
+          fontWeight: 700,
+          mb: 1,
+        }}
+      >
         Rating
       </Typography>
-      <Stack direction="row" flexWrap="wrap" gap={0.75} sx={{ mb: 2.5 }}>
+      <Stack
+        direction="row"
+        sx={{
+          flexWrap: 'wrap',
+          gap: 0.75,
+          mb: 2.5,
+        }}
+      >
         {RATING_OPTIONS.map((option) => {
           const selected = (value.rating ?? undefined) === option.value;
           return (

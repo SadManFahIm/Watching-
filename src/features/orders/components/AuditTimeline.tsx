@@ -20,9 +20,21 @@ const AuditTimeline = ({ events, title = 'Activity' }: AuditTimelineProps) => {
 
   return (
     <Box>
-      <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1.5 }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: 'center',
+          mb: 1.5,
+        }}
+      >
         <HistoryOutlined fontSize="small" color="action" />
-        <Typography variant="subtitle2" fontWeight={700}>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            fontWeight: 700,
+          }}
+        >
           {title}
         </Typography>
       </Stack>
@@ -40,15 +52,31 @@ const AuditTimeline = ({ events, title = 'Activity' }: AuditTimelineProps) => {
               }}
             />
             <Box sx={{ minWidth: 0 }}>
-              <Typography variant="body2" fontWeight={600}>
+              <Typography
+                variant="body2"
+                sx={{
+                  fontWeight: 600,
+                }}
+              >
                 {event.action}
               </Typography>
               {event.detail && (
-                <Typography variant="caption" color="text.secondary" display="block">
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: 'text.secondary',
+                    display: 'block',
+                  }}
+                >
                   {event.detail}
                 </Typography>
               )}
-              <Typography variant="caption" color="text.secondary">
+              <Typography
+                variant="caption"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
                 {formatDate(event.at, 'long')} · {event.actor}
               </Typography>
             </Box>

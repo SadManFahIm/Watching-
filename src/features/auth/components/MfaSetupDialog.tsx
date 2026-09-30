@@ -86,11 +86,28 @@ const MfaSetupDialog = ({ open, onClose, onEnabled }: MfaSetupDialogProps) => {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ pb: 1 }}>
-        <Stack direction="row" spacing={1.5} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1.5}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
           <SmartphoneOutlined color="primary" />
           <Box>
-            <Typography fontWeight={700}>Two-factor authentication</Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              sx={{
+                fontWeight: 700,
+              }}
+            >
+              Two-factor authentication
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               Time-based one-time passwords (TOTP)
             </Typography>
           </Box>
@@ -99,22 +116,38 @@ const MfaSetupDialog = ({ open, onClose, onEnabled }: MfaSetupDialogProps) => {
 
       <DialogContent dividers>
         {busy && step === 'init' ? (
-          <Stack alignItems="center" spacing={2} sx={{ py: 5 }}>
+          <Stack
+            spacing={2}
+            sx={{
+              alignItems: 'center',
+              py: 5,
+            }}
+          >
             <CircularProgress size={28} />
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               Generating a secure secret…
             </Typography>
           </Stack>
         ) : step === 'done' ? (
           <Alert severity="success">
-            Two-factor authentication is now enabled. The next time you sign in, you'll be asked
-            for a code from your authenticator app.
+            Two-factor authentication is now enabled. The next time you sign in, you'll be asked for
+            a code from your authenticator app.
           </Alert>
         ) : (
           <Stack spacing={2}>
             {error && <Alert severity="error">{error}</Alert>}
 
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'text.secondary',
+              }}
+            >
               Scan this key into your authenticator app (Google Authenticator, 1Password, Authy…):
             </Typography>
 
@@ -133,7 +166,13 @@ const MfaSetupDialog = ({ open, onClose, onEnabled }: MfaSetupDialogProps) => {
               {secret || '…'}
             </Box>
 
-            <Typography variant="caption" color="text.secondary" sx={{ wordBreak: 'break-all' }}>
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+                wordBreak: 'break-all',
+              }}
+            >
               {otpAuthUrl}
             </Typography>
 

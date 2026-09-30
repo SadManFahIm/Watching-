@@ -198,19 +198,24 @@ const getDesignTokens = (mode: 'light' | 'dark'): ThemeOptions => ({
             boxShadow: '0px 4px 12px rgba(0,0,0,0.15)',
           },
         },
-        containedPrimary: {
-          background:
-            mode === 'light'
-              ? 'linear-gradient(135deg, #24447C 0%, #18315A 100%)'
-              : 'linear-gradient(135deg, #4A5FC1 0%, #3867D6 100%)',
-          '&:hover': {
+      },
+      variants: [
+        {
+          props: { variant: 'contained', color: 'primary' },
+          style: {
             background:
               mode === 'light'
-                ? 'linear-gradient(135deg, #18315A 0%, #10224B 100%)'
-                : 'linear-gradient(135deg, #3867D6 0%, #2A4FB8 100%)',
+                ? 'linear-gradient(135deg, #24447C 0%, #18315A 100%)'
+                : 'linear-gradient(135deg, #4A5FC1 0%, #3867D6 100%)',
+            '&:hover': {
+              background:
+                mode === 'light'
+                  ? 'linear-gradient(135deg, #18315A 0%, #10224B 100%)'
+                  : 'linear-gradient(135deg, #3867D6 0%, #2A4FB8 100%)',
+            },
           },
         },
-      },
+      ],
     },
     MuiCard: {
       styleOverrides: {

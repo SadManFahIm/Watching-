@@ -14,7 +14,7 @@ import {
   AdminPanelSettingsOutlined,
   Inventory2Outlined,
   LocalShippingOutlined,
-  CheckCircleOutline,
+  CheckCircleOutlined,
   FavoriteBorder,
   ReceiptLongOutlined,
 } from '@mui/icons-material';
@@ -43,7 +43,7 @@ const DashboardPage = () => {
   const stats = [
     { label: 'Total orders', value: totalOrders, icon: ReceiptLongOutlined, color: 'primary.main' },
     { label: 'In progress', value: inProgress, icon: LocalShippingOutlined, color: 'info.main' },
-    { label: 'Delivered', value: delivered, icon: CheckCircleOutline, color: 'success.main' },
+    { label: 'Delivered', value: delivered, icon: CheckCircleOutlined, color: 'success.main' },
     { label: 'Wishlist items', value: wishlistCount, icon: FavoriteBorder, color: 'error.main' },
   ];
 
@@ -56,17 +56,36 @@ const DashboardPage = () => {
         description="Your Classic Watch Pro account dashboard — track orders and manage your collection."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={700} sx={{ mb: 0.5 }}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 700,
+          mb: 0.5,
+        }}
+      >
         Welcome back{user?.displayName ? `, ${user.displayName.split(' ')[0]}` : ''}
       </Typography>
-      <Typography color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mb: 3,
+        }}
+      >
         Here is what is happening with your collection.
       </Typography>
 
       {/* Stats */}
       <Grid container spacing={2.5} sx={{ mb: 4 }}>
         {stats.map((stat) => (
-          <Grid item key={stat.label} xs={12} sm={6} lg={3}>
+          <Grid
+            key={stat.label}
+            size={{
+              xs: 12,
+              sm: 6,
+              lg: 3,
+            }}
+          >
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                 <Paper sx={{ p: 1.5, borderRadius: 2, bgcolor: 'action.hover', display: 'flex' }}>
@@ -75,10 +94,22 @@ const DashboardPage = () => {
                 <Box>
                   {/* KPI figures are data, not document headings — render
                       them outside the heading outline. */}
-                  <Typography component="div" variant="h5" fontWeight={800} lineHeight={1.2}>
+                  <Typography
+                    component="div"
+                    variant="h5"
+                    sx={{
+                      fontWeight: 800,
+                      lineHeight: 1.2,
+                    }}
+                  >
                     {stat.value}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'text.secondary',
+                    }}
+                  >
                     {stat.label}
                   </Typography>
                 </Box>
@@ -90,9 +121,27 @@ const DashboardPage = () => {
 
       <Grid container spacing={3}>
         {/* Recent orders */}
-        <Grid item xs={12} lg={8}>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-            <Typography variant="h6" component="h2" fontWeight={700}>
+        <Grid
+          size={{
+            xs: 12,
+            lg: 8,
+          }}
+        >
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mb: 2,
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                fontWeight: 700,
+              }}
+            >
               Recent orders
             </Typography>
             <Button
@@ -147,14 +196,31 @@ const DashboardPage = () => {
                   }}
                 >
                   <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                    <Typography fontWeight={700}>Order #{order.id.toUpperCase()}</Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      sx={{
+                        fontWeight: 700,
+                      }}
+                    >
+                      Order #{order.id.toUpperCase()}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'text.secondary',
+                      }}
+                    >
                       {formatDate(order.createdAt, 'short')} ·{' '}
                       {order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)
                     </Typography>
                   </Box>
                   <OrderStatusBadge status={order.orderStatus} />
-                  <Typography fontWeight={800}>{formatCurrency(order.total)}</Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 800,
+                    }}
+                  >
+                    {formatCurrency(order.total)}
+                  </Typography>
                 </Paper>
               ))}
             </Stack>
@@ -162,8 +228,20 @@ const DashboardPage = () => {
         </Grid>
 
         {/* Quick actions */}
-        <Grid item xs={12} lg={4}>
-          <Typography variant="h6" component="h2" fontWeight={700} sx={{ mb: 2 }}>
+        <Grid
+          size={{
+            xs: 12,
+            lg: 4,
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              mb: 2,
+            }}
+          >
             Quick actions
           </Typography>
           <Stack spacing={1.5}>

@@ -131,10 +131,22 @@ const LoginPage = () => {
           description="Confirm it's you with a second factor to continue to your Classic Watch Pro account."
           noindex
         />
-        <Typography variant="h4" component="h1" fontWeight={800}>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            fontWeight: 800,
+          }}
+        >
           Two-factor authentication
         </Typography>
-        <Typography color="text.secondary" sx={{ mt: 0.5, mb: 3 }}>
+        <Typography
+          sx={{
+            color: 'text.secondary',
+            mt: 0.5,
+            mb: 3,
+          }}
+        >
           {pendingMfa.mode === 'passkey'
             ? 'Confirm it is you with a passkey.'
             : 'Enter the 6-digit code from your authenticator app.'}
@@ -204,10 +216,22 @@ const LoginPage = () => {
         description="Sign in to your Classic Watch Pro account to manage your collection, track orders and save your favourite timepieces."
         noindex
       />
-      <Typography variant="h4" component="h1" fontWeight={800}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          fontWeight: 800,
+        }}
+      >
         Welcome back
       </Typography>
-      <Typography color="text.secondary" sx={{ mt: 0.5, mb: 3 }}>
+      <Typography
+        sx={{
+          color: 'text.secondary',
+          mt: 0.5,
+          mb: 3,
+        }}
+      >
         Sign in to manage your collection and orders.
       </Typography>
 
@@ -254,9 +278,11 @@ const LoginPage = () => {
               component={RouterLink}
               to="/forgot-password"
               variant="body2"
-              color="primary.main"
-              fontWeight={600}
-              sx={{ textDecoration: 'none' }}
+              sx={{
+                color: 'primary.main',
+                fontWeight: 600,
+                textDecoration: 'none',
+              }}
             >
               Forgot password?
             </Typography>
@@ -275,7 +301,12 @@ const LoginPage = () => {
       </Box>
 
       <Divider sx={{ my: 3 }}>
-        <Typography variant="caption" color="text.secondary">
+        <Typography
+          variant="caption"
+          sx={{
+            color: 'text.secondary',
+          }}
+        >
           OR
         </Typography>
       </Divider>
@@ -291,14 +322,23 @@ const LoginPage = () => {
         {googlePending ? 'Connecting…' : 'Continue with Google'}
       </Button>
 
-      <Typography variant="body2" color="text.secondary" sx={{ mt: 3, textAlign: 'center' }}>
+      <Typography
+        variant="body2"
+        sx={{
+          color: 'text.secondary',
+          mt: 3,
+          textAlign: 'center',
+        }}
+      >
         New to Classic Watch Pro?{' '}
         <Typography
           component={RouterLink}
           to="/register"
-          color="primary.main"
-          fontWeight={700}
-          sx={{ textDecoration: 'none' }}
+          sx={{
+            color: 'primary.main',
+            fontWeight: 700,
+            textDecoration: 'none',
+          }}
         >
           Create an account
         </Typography>

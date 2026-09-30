@@ -14,12 +14,26 @@ const CATEGORY_TAGLINES: Record<string, string> = {
 const Categories = () => {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 5, md: 7 } }}>
-      <Typography variant="h4" component="h2" fontWeight={700} sx={{ mb: 3 }}>
+      <Typography
+        variant="h4"
+        component="h2"
+        sx={{
+          fontWeight: 700,
+          mb: 3,
+        }}
+      >
         Shop by category
       </Typography>
       <Grid container spacing={{ xs: 2, md: 3 }}>
         {PRODUCT_CATEGORIES.map((category) => (
-          <Grid item key={category.value} xs={12} sm={6} md={4}>
+          <Grid
+            key={category.value}
+            size={{
+              xs: 12,
+              sm: 6,
+              md: 4,
+            }}
+          >
             <Card sx={{ height: '100%', borderRadius: 2 }}>
               <CardActionArea
                 component={RouterLink}
@@ -36,18 +50,34 @@ const Categories = () => {
                   }}
                 >
                   {/* Card content heading — h3 under the section's h2 (axe heading-order). */}
-                  <Typography variant="h6" component="h3" fontWeight={700}>
+                  <Typography
+                    variant="h6"
+                    component="h3"
+                    sx={{
+                      fontWeight: 700,
+                    }}
+                  >
                     {category.label}
                   </Typography>
                   <Box>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'text.secondary',
+                        mb: 1,
+                      }}
+                    >
                       {CATEGORY_TAGLINES[category.value] ?? 'Explore the collection'}
                     </Typography>
                     <Typography
                       variant="body2"
-                      color="primary.main"
-                      fontWeight={700}
-                      sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
+                      sx={{
+                        color: 'primary.main',
+                        fontWeight: 700,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 0.5,
+                      }}
                     >
                       Explore <ArrowForward fontSize="small" />
                     </Typography>
