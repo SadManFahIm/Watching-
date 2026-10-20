@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import type { AxiosAdapter, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import type { Order, Product, PromoCode, Review, User } from '@/types';
+import { canTransition } from '@/features/orders/constants';
 import {
   appendEvent,
   filterProducts,
@@ -364,6 +365,12 @@ const handleOrders = async (config: InternalAxiosRequestConfig): Promise<AxiosRe
     if (!order) return notFound(config, 'Order not found');
     const body = parseBody(config) as { status?: Order['orderStatus']; trackingNumber?: string };
     const previous = order.orderStatus;
+    if (body.status && !canTransition(previous, body.status)) {
+      return toResponse(config, 400, {
+        success: false,
+        message: `Cannot change order status from ${previous} to ${body.status}.`,
+      });
+    }
     const hadTracking = Boolean(order.trackingNumber);
     if (body.status) order.orderStatus = body.status;
     if (body.trackingNumber) order.trackingNumber = body.trackingNumber;

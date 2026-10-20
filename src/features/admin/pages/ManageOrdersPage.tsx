@@ -20,7 +20,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import { useAllOrders, useUpdateOrderStatus, useRefundOrder } from '@/api/orders.api';
 import OrderStatusBadge from '@/features/orders/components/OrderStatusBadge';
 import AuditTimeline from '@/features/orders/components/AuditTimeline';
-import { ORDER_STATUS_LABELS, PAYMENT_META } from '@/features/orders/constants';
+import {
+  NEXT_STATUS_OPTIONS,
+  ORDER_STATUS_LABELS,
+  PAYMENT_META,
+} from '@/features/orders/constants';
 import { pushNotification } from '@/store/notifications.store';
 import SkeletonLoader from '@/components/common/SkeletonLoader';
 import EmptyState from '@/components/common/EmptyState';
@@ -36,12 +40,6 @@ const STATUS_FILTERS: { value: 'all' | OrderStatus; label: string }[] = [
   { value: 'delivered', label: 'Delivered' },
   { value: 'cancelled', label: 'Cancelled' },
 ];
-
-const NEXT_STATUS_OPTIONS: Partial<Record<OrderStatus, OrderStatus[]>> = {
-  pending: ['processing', 'cancelled'],
-  processing: ['shipped', 'cancelled'],
-  shipped: ['delivered'],
-};
 
 const canAdvance = (status: OrderStatus): boolean => Boolean(NEXT_STATUS_OPTIONS[status]?.length);
 
