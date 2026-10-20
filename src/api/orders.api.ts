@@ -7,7 +7,8 @@ import toast from 'react-hot-toast';
 export const orderKeys = {
   all: ['orders'] as const,
   lists: () => [...orderKeys.all, 'list'] as const,
-  list: (userId?: string, page = 1) => [...orderKeys.lists(), { userId, page }] as const,
+  list: (userId?: string, page = 1, pageSize?: number) =>
+    [...orderKeys.lists(), { userId, page, pageSize }] as const,
   details: () => [...orderKeys.all, 'detail'] as const,
   detail: (id: string) => [...orderKeys.details(), id] as const,
   myOrders: (userId: string) => [...orderKeys.all, 'my-orders', userId] as const,
@@ -16,7 +17,7 @@ export const orderKeys = {
 // Fetch all orders (Admin)
 export const useAllOrders = (page = 1, pageSize = 20) => {
   return useQuery({
-    queryKey: orderKeys.list(undefined, page),
+    queryKey: orderKeys.list(undefined, page, pageSize),
     queryFn: async () => {
       const response = await api.get<PaginatedResponse<Order>>(
         `/orders?page=${page}&pageSize=${pageSize}`

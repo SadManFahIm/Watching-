@@ -98,6 +98,35 @@ describe('mock adapter persistence + audit integration', () => {
     expect(reloadedLast?.at).toBeInstanceOf(Date);
   });
 
+  it('rejects status changes outside the order lifecycle and leaves the order untouched', async () => {
+    const adapter = await loadAdapter();
+
+    // o1 is delivered — a terminal state.
+    await expect(
+      adapter(config('patch', '/orders/o1/status', { status: 'pending' }))
+    ).rejects.toMatchObject({ response: { status: 400 } });
+    // o3 is processing — it cannot skip shipping.
+    await expect(
+      adapter(config('patch', '/orders/o3/status', { status: 'delivered' }))
+    ).rejects.toMatchObject({ response: { status: 400 } });
+
+    const o1 = (await adapter(config('get', '/orders/o1'))).data;
+    expect(o1.orderStatus).toBe('delivered');
+    const o3 = (await adapter(config('get', '/orders/o3'))).data;
+    expect(o3.orderStatus).toBe('processing');
+  });
+
+  it('allows a same-status update that only adds tracking', async () => {
+    const adapter = await loadAdapter();
+
+    // o2 is already shipped.
+    const updated = (
+      await adapter(config('patch', '/orders/o2/status', { status: 'shipped', trackingNumber: 'CWP2026TRK1' }))
+    ).data;
+    expect(updated.orderStatus).toBe('shipped');
+    expect(updated.trackingNumber).toBe('CWP2026TRK1');
+  });
+
   it('persists role changes with audit events and default 2FA state', async () => {
     const adapter = await loadAdapter();
 
