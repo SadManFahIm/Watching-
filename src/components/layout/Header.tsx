@@ -38,6 +38,7 @@ import {
   NotificationsActiveOutlined,
   DoneAll,
 } from '@mui/icons-material';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { useCartStore } from '@/store/cart.store';
 import { useWishlistStore } from '@/store/wishlist.store';
@@ -61,7 +62,14 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { user, isAuthenticated, isAdmin, signOut } = useAuthStore();
+  const { user, isAuthenticated, isAdmin, signOut } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      isAuthenticated: state.isAuthenticated,
+      isAdmin: state.isAdmin,
+      signOut: state.signOut,
+    }))
+  );
   const itemCount = useCartStore((state) => state.itemCount);
   const wishlistCount = useWishlistStore((state) => state.items.length);
   const notifications = useNotificationsStore((state) => state.items);

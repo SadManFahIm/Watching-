@@ -25,6 +25,7 @@ import {
   RateReviewOutlined,
   Logout,
 } from '@mui/icons-material';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 
 interface SidebarLink {
@@ -40,7 +41,9 @@ interface SidebarSection {
 
 const Sidebar = ({ onNavigate }: { onNavigate?: () => void }) => {
   const location = useLocation();
-  const { user, isAdmin, signOut } = useAuthStore();
+  const { user, isAdmin, signOut } = useAuthStore(
+    useShallow((state) => ({ user: state.user, isAdmin: state.isAdmin, signOut: state.signOut }))
+  );
 
   const sections: SidebarSection[] = [
     {

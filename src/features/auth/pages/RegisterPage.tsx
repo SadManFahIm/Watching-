@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Alert, Box, Button, CircularProgress, Stack, TextField, Typography } from '@mui/material';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
@@ -31,7 +32,14 @@ type RegisterValues = z.infer<typeof registerSchema>;
 const RegisterPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isAuthenticated, isLoading, signUp } = useAuthStore();
+  const { user, isAuthenticated, isLoading, signUp } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      isAuthenticated: state.isAuthenticated,
+      isLoading: state.isLoading,
+      signUp: state.signUp,
+    }))
+  );
   const [formError, setFormError] = useState<string | null>(null);
 
   const destination = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname;

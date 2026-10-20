@@ -27,6 +27,7 @@ import {
   SmartphoneOutlined,
 } from '@mui/icons-material';
 import MfaSetupDialog from '@/features/auth/components/MfaSetupDialog';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
@@ -45,7 +46,18 @@ const ProfilePage = () => {
     disableMfa,
     registerPasskey,
     removePasskey,
-  } = useAuthStore();
+  } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      isAdmin: state.isAdmin,
+      signOut: state.signOut,
+      sendEmailVerification: state.sendEmailVerification,
+      refreshAuthState: state.refreshAuthState,
+      disableMfa: state.disableMfa,
+      registerPasskey: state.registerPasskey,
+      removePasskey: state.removePasskey,
+    }))
+  );
   const [verifyBusy, setVerifyBusy] = useState<'send' | 'check' | null>(null);
   const [verifyNotice, setVerifyNotice] = useState<string | null>(null);
   const [mfaDialogOpen, setMfaDialogOpen] = useState(false);
