@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { KeyOutlined, SmartphoneOutlined } from '@mui/icons-material';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import { getApiErrorMessage } from '@/lib/axios';
@@ -41,7 +42,19 @@ const LoginPage = () => {
     signOut,
     verifyMfaChallenge,
     signInWithPasskey,
-  } = useAuthStore();
+  } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      isAuthenticated: state.isAuthenticated,
+      isLoading: state.isLoading,
+      pendingMfa: state.pendingMfa,
+      signIn: state.signIn,
+      signInWithGoogle: state.signInWithGoogle,
+      signOut: state.signOut,
+      verifyMfaChallenge: state.verifyMfaChallenge,
+      signInWithPasskey: state.signInWithPasskey,
+    }))
+  );
   const [formError, setFormError] = useState<string | null>(null);
   const [googlePending, setGooglePending] = useState(false);
   const [mfaCode, setMfaCode] = useState('');

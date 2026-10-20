@@ -7,6 +7,7 @@ import {
   SendOutlined,
   VerifiedUserOutlined,
 } from '@mui/icons-material';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { getApiErrorMessage } from '@/lib/axios';
 import AuthLayout from '@/features/auth/components/AuthLayout';
@@ -22,7 +23,16 @@ const VerifyEmailPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated, isLoading, sendEmailVerification, refreshAuthState, signOut } =
-    useAuthStore();
+    useAuthStore(
+      useShallow((state) => ({
+        user: state.user,
+        isAuthenticated: state.isAuthenticated,
+        isLoading: state.isLoading,
+        sendEmailVerification: state.sendEmailVerification,
+        refreshAuthState: state.refreshAuthState,
+        signOut: state.signOut,
+      }))
+    );
   const [sending, setSending] = useState(false);
   const [checking, setChecking] = useState(false);
   const [notice, setNotice] = useState<{ tone: 'success' | 'error'; message: string } | null>(null);

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
 import LoadingScreen from './LoadingScreen';
@@ -11,7 +12,14 @@ interface AdminRouteProps {
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  const { user, isAuthenticated, isAdmin, isLoading } = useAuthStore();
+  const { user, isAuthenticated, isAdmin, isLoading } = useAuthStore(
+    useShallow((state) => ({
+      user: state.user,
+      isAuthenticated: state.isAuthenticated,
+      isAdmin: state.isAdmin,
+      isLoading: state.isLoading,
+    }))
+  );
   const location = useLocation();
 
   if (isLoading) {
