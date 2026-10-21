@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient, UseQueryOptions } from '@tanstack/react-query';
 import api, { getApiErrorMessage } from '@/lib/axios';
 import type { Product, ProductFilters, PaginatedResponse, SortOption } from '@/types';
+import { fetchAllPages } from './pagination';
 import toast from 'react-hot-toast';
 
 // Query keys
@@ -9,11 +10,27 @@ export const productKeys = {
   lists: () => [...productKeys.all, 'list'] as const,
   list: (filters?: ProductFilters, sort?: SortOption, page = 1) =>
     [...productKeys.lists(), { filters, sort, page }] as const,
+  allPages: (pageSize: number) => [...productKeys.lists(), 'all-pages', pageSize] as const,
   details: () => [...productKeys.all, 'detail'] as const,
   detail: (id: string) => [...productKeys.details(), id] as const,
   featured: () => [...productKeys.all, 'featured'] as const,
   latest: () => [...productKeys.all, 'latest'] as const,
   search: (query: string) => [...productKeys.all, 'search', query] as const,
+};
+
+// Fetch every product across all pages (Admin analytics)
+export const useEveryProduct = (pageSize = 100) => {
+  return useQuery({
+    queryKey: productKeys.allPages(pageSize),
+    queryFn: () =>
+      fetchAllPages(async (page) => {
+        const response = await api.get<PaginatedResponse<Product>>(
+          `/products?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
+      }),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 };
 
 // Fetch products with filters

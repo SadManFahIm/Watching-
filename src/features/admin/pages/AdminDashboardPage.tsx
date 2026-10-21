@@ -34,10 +34,9 @@ import {
 } from '@mui/icons-material';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { useAllOrders } from '@/api/orders.api';
+import { useEveryOrder } from '@/api/orders.api';
 import { useUsers } from '@/api/users.api';
-import { useProducts } from '@/api/products.api';
-import { PRODUCTS_PAGE_SIZE } from '@/features/products/constants';
+import { useEveryProduct } from '@/api/products.api';
 import Seo from '@/components/seo/Seo';
 import { useAuthStore } from '@/store/auth.store';
 import { mockApiEnabled } from '@/config';
@@ -129,13 +128,14 @@ const AdminDashboardPage = () => {
     setExportAnchor(null);
   };
 
-  const ordersQuery = useAllOrders(1, 100);
+  // Analytics need the full order and product lists, not just the first page.
+  const ordersQuery = useEveryOrder();
   const usersQuery = useUsers();
-  const productsQuery = useProducts(undefined, undefined, 1, PRODUCTS_PAGE_SIZE);
+  const productsQuery = useEveryProduct();
 
-  const orders = useMemo(() => ordersQuery.data?.data ?? [], [ordersQuery.data]);
+  const orders = useMemo(() => ordersQuery.data ?? [], [ordersQuery.data]);
   const users = useMemo(() => usersQuery.data ?? [], [usersQuery.data]);
-  const products = useMemo(() => productsQuery.data?.data ?? [], [productsQuery.data]);
+  const products = useMemo(() => productsQuery.data ?? [], [productsQuery.data]);
 
   const revenue = orders
     .filter((order) => order.orderStatus !== 'cancelled')
