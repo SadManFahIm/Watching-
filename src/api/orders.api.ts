@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api, { getApiErrorMessage } from '@/lib/axios';
 import type { Order, OrderStatus, PaginatedResponse } from '@/types';
+import { fetchAllPages } from './pagination';
 import toast from 'react-hot-toast';
 
 // Query keys
@@ -9,6 +10,7 @@ export const orderKeys = {
   lists: () => [...orderKeys.all, 'list'] as const,
   list: (userId?: string, page = 1, pageSize?: number) =>
     [...orderKeys.lists(), { userId, page, pageSize }] as const,
+  allPages: (pageSize: number) => [...orderKeys.lists(), 'all-pages', pageSize] as const,
   details: () => [...orderKeys.all, 'detail'] as const,
   detail: (id: string) => [...orderKeys.details(), id] as const,
   myOrders: (userId: string) => [...orderKeys.all, 'my-orders', userId] as const,
@@ -24,6 +26,21 @@ export const useAllOrders = (page = 1, pageSize = 20) => {
       );
       return response.data;
     },
+    staleTime: 1000 * 60 * 2, // 2 minutes
+  });
+};
+
+// Fetch every order across all pages (Admin analytics)
+export const useEveryOrder = (pageSize = 100) => {
+  return useQuery({
+    queryKey: orderKeys.allPages(pageSize),
+    queryFn: () =>
+      fetchAllPages(async (page) => {
+        const response = await api.get<PaginatedResponse<Order>>(
+          `/orders?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data;
+      }),
     staleTime: 1000 * 60 * 2, // 2 minutes
   });
 };
