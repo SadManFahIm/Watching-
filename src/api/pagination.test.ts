@@ -31,4 +31,18 @@ describe('fetchAllPages', () => {
 
     await expect(fetchAllPages(fetchPage)).resolves.toEqual([]);
   });
+
+  it.each([
+    ['a bare array', [{ id: 'o1' }]],
+    ['a differently-keyed object', { products: [{ id: 'p1' }] }],
+  ])('returns an empty list instead of [undefined] for %s', async (_label, response) => {
+    // The live server answers in shapes other than PaginatedResponse; callers
+    // iterate the result, so it must never contain undefined entries.
+    const fetchPage = vi.fn(() =>
+      Promise.resolve(response as unknown as PaginatedResponse<{ id: string }>)
+    );
+
+    await expect(fetchAllPages(fetchPage)).resolves.toEqual([]);
+    expect(fetchPage).toHaveBeenCalledTimes(1);
+  });
 });
