@@ -195,7 +195,7 @@ All configuration is provided via **environment variables** (Vite reads them fro
 
 | Variable | Required | Purpose |
 | -------- | -------- | ------- |
-| `VITE_API_BASE_URL` | No | Backend API URL (demo mode ignores this) |
+| `VITE_API_BASE_URL` | No | Your backend API URL. No default — when unset, the app uses the built-in mock API |
 | `VITE_FIREBASE_API_KEY` | No | Firebase API key (enables real auth) |
 | `VITE_FIREBASE_AUTH_DOMAIN` | No | Firebase auth domain |
 | `VITE_FIREBASE_PROJECT_ID` | No | Firebase project ID |

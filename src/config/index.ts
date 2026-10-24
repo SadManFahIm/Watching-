@@ -4,13 +4,17 @@ const hasFirebaseCredentials = Boolean(
   import.meta.env.VITE_FIREBASE_APP_ID
 );
 
+// The backend this app talks to. There is deliberately no default host: the
+// app must only ever send data to an API it was explicitly configured with.
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+
 // Demo mode: serve the whole storefront from an in-memory mock API.
 // Enabled explicitly via VITE_ENABLE_MOCK_API=true, or automatically whenever
-// no Firebase credentials are configured — in development AND in production
-// builds, so a deployed demo is fully self-contained instead of pointing at a
-// dead backend. Configuring real Firebase credentials flips it off.
+// no Firebase credentials or no API URL are configured — in development AND in
+// production builds, so a deployed demo is fully self-contained instead of
+// pointing at a backend nobody set up. Configuring both flips it off.
 export const mockApiEnabled =
-  import.meta.env.VITE_ENABLE_MOCK_API === 'true' || !hasFirebaseCredentials;
+  import.meta.env.VITE_ENABLE_MOCK_API === 'true' || !hasFirebaseCredentials || !apiBaseUrl;
 
 export const demoUserId = 'demo-user';
 
@@ -51,7 +55,7 @@ interface Config {
 }
 
 const config: Config = {
-  apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'https://classic-watch-server.onrender.com',
+  apiBaseUrl,
   mockApiEnabled,
 
   firebase: {
